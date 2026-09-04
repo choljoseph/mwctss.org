@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Sudan Tourism Board — Where the Nile Meets the Wild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Include FontAwesome for Social and WhatsApp Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  :root{
+    --ink:#102E4A; --ink-soft:#1A2E3A; --gold:#4AA8E0; --gold-bright:#87CFF5;
+    --wetland:#2E7DA6; --clay:#3A8FB7; --sand:#EDF6FC; --sand-deep:#D6EBF8;
+    --white:#FBFDFF; --line:rgba(16,46,74,0.12); --shadow: 0 12px 40px rgba(16,46,74,0.12);
+    --display: 'Fraunces', serif; --body: 'Work Sans', sans-serif; --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0; font-family:var(--body); color:var(--ink-soft); background:var(--white); -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:var(--display); margin:0; color:var(--ink); font-weight:600; letter-spacing:-0.01em;}
+  p{line-height:1.65; margin:0 0 1em;} a{color:inherit; text-decoration:none;} ul{margin:0; padding:0; list-style:none;} img{max-width:100%; display:block;}
+  .mono{font-family:var(--mono); letter-spacing:0.02em;}
+  .eyebrow{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--wetland); display:flex; align-items:center; gap:0.6em; margin-bottom:0.9em;}
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--gold); display:inline-block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px);} section{position:relative;}
+  .btn{display:inline-flex; align-items:center; gap:0.5em; padding:0.85em 1.6em; border-radius:2px; font-size:0.92rem; font-weight:600; letter-spacing:0.02em; border:1px solid transparent; cursor:pointer; transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;}
+  .btn-primary{background:var(--gold); color:#fff;} .btn-primary:hover{background:var(--wetland); transform:translateY(-2px);}
+  .btn-ghost{border-color:rgba(251,253,255,0.5); color:var(--white);} .btn-ghost:hover{border-color:var(--white); transform:translateY(-2px);}
+  .btn-dark{border-color:var(--ink); color:var(--ink);} .btn-dark:hover{background:var(--ink); color:var(--white);}
+  .current{width:100%; height:34px; display:block;} .current path{fill:none; stroke:var(--gold); stroke-width:1.4; opacity:0.65;} .current-divider{background:var(--ink); overflow:hidden;}
+
+  /* Top Bar with Social Media Icons */
+  .top-bar {
+    background: #0b2338;
+    color: var(--sand);
+    font-size: 0.8rem;
+    padding: 8px clamp(20px, 4vw, 48px);
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    border-bottom: 1px solid rgba(251,253,255,0.06);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 101;
+  }
+  .top-bar-contact {
+    display: flex;
+    gap: 20px;
+  }
+  .top-bar-contact span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .top-bar-socials {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .top-bar-socials a {
+    color: var(--sand);
+    transition: color 0.2s ease;
+    font-size: 0.9rem;
+  }
+  .top-bar-socials a:hover {
+    color: var(--gold-bright);
+  }
+  @media(max-width: 768px) {
+    .top-bar-contact { display: none; }
+    .top-bar { justify-content: flex-end; }
+  }
+
+  /* Floating WhatsApp Widget */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #FFF;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .whatsapp-float:hover {
+    background-color: #20ba5a;
+    transform: scale(1.1);
+  }
+  .whatsapp-tooltip {
+    position: absolute;
+    right: 70px;
+    background: #fff;
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+  }
+
+  header{position:fixed; top:37px; left:0; right:0; z-index:100; background:transparent; backdrop-filter:blur(4px); border-bottom:1px solid rgba(251,253,255,0.12);}
+  .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
+  .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;} 
+  .brand-logo-img{height:82px; width:auto; object-fit:contain; flex:none;}
+  .brand-text{font-family:var(--display); font-size:1.35rem; font-weight:700; line-height:1.1; letter-spacing:-0.01em;} 
+  .brand-text span{display:block; font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; color:var(--gold-bright); text-transform:uppercase; margin-top:3px; font-weight:500;}
+  
+  nav.links{display:flex; gap:24px; align-items:center; margin-right:28px;} nav.links a{color:var(--sand); font-size:0.86rem; font-weight:500; position:relative; padding:4px 0;} nav.links a:hover{color:var(--white);} nav.links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold-bright); transition:width .25s ease;} nav.links a:hover::after{width:100%;}
+  .nav-dropdown{position:relative} .nav-dropdown:hover .dropdown-menu{display:block}
+  .dropdown-menu{display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%); background:#fff; min-width:260px; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.2); padding:10px 0; z-index:99}
+  .dropdown-menu a{display:block; padding:9px 16px; font-size:13px; color:#222 !important} .dropdown-menu a:hover{background:var(--sand); color:var(--ink) !important}
+  .dropdown-header{padding:8px 16px; font-size:10px; font-weight:800; letter-spacing:1px; color:#999; font-family:var(--mono)} .dropdown-divider{height:1px; background:#eee; margin:6px 0}
+  .nav-cta{display:flex; align-items:center; gap:14px;} .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px;} .burger span{width:22px; height:2px; background:var(--white);} .mobile-menu{display:none; flex-direction:column; background:var(--ink); padding:10px 24px 26px;} .mobile-menu a{color:var(--sand); padding:12px 0; border-bottom:1px solid rgba(251,253,255,0.08); font-size:0.95rem;} .mobile-menu.open{display:flex;}
+  @media(max-width:1020px){ nav.links{display:none;} .nav-cta .btn{display:none;} .burger{display:flex;} }
+  
+  .hero{min-height:100vh; display:flex; align-items:flex-end; position:relative; color:var(--white); background: linear-gradient(180deg, rgba(16,46,74,0.25) 0%, rgba(16,46,74,0.55) 55%, rgba(16,46,74,0.96) 100%), radial-gradient(ellipse at 30% 20%, rgba(74,168,224,0.28), transparent 60%), linear-gradient(120deg,#1A4A6B 0%, #102E4A 55%, #0B2338 100%); overflow:hidden;}
+  .hero-herds{position:absolute; inset:0; opacity:0.5;} .hero-inner{position:relative; z-index:2; padding:210px 0 90px;}
+  .hero-eyebrow{font-family:var(--mono); font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:22px;}
+  .hero h1{font-size:clamp(2.6rem, 6vw, 5.1rem); color:var(--white); line-height:1.02; font-weight:600; max-width:14ch;} .hero h1 em{font-style:italic; color:var(--gold-bright); font-weight:500;}
+  .hero-sub{max-width:520px; font-size:1.08rem; color:rgba(251,253,255,0.82); margin:26px 0 38px;} .hero-actions{display:flex; flex-wrap:wrap; gap:16px;}
+  .hero-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:70px; border-top:1px solid rgba(251,253,255,0.18); padding-top:26px;}
+  .hero-stats div{padding-right:20px; border-left:1px solid rgba(251,253,255,0.14); padding-left:20px;} .hero-stats div:first-child{border-left:none; padding-left:0;}
+  .hero-stat-num{font-family:var(--mono); font-size:1.7rem; color:var(--gold-bright); display:block;} .hero-stat-label{font-size:0.78rem; color:rgba(251,253,255,0.7); margin-top:4px;}
+  @media(max-width:760px){ .hero-stats{grid-template-columns:repeat(2,1fr); row-gap:22px;} }
+  
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:46px; flex-wrap:wrap;} .section-head h2{font-size:clamp(1.7rem,3vw,2.5rem);} .section-head p{max-width:440px; color:#4a544e; font-size:0.98rem; margin:0;} .section-pad{padding:110px 0;} .bg-sand{background:var(--sand);} .bg-white{background:var(--white);} .bg-ink{background:var(--ink); color:var(--white);} .bg-ink h2, .bg-ink h3, .bg-ink h4{color:var(--white);}
+  .card-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .exp-card{position:relative; aspect-ratio:3/4.2; border-radius:3px; overflow:hidden; color:var(--white); display:flex; flex-direction:column; justify-content:flex-end; padding:22px 18px; cursor:pointer; background-size:cover; background-position:center; isolation:isolate;}
+  .exp-card::before{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,46,74,0) 30%, rgba(16,46,74,0.92) 100%); z-index:0;} .exp-card *{position:relative; z-index:1;}
+  .exp-card .tag{font-family:var(--mono); font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:8px;} .exp-card h4{color:var(--white); font-size:1.12rem; line-height:1.2;} .exp-card{transition:transform .4s ease;} .exp-card:hover{transform:translateY(-6px);}
+  @media(max-width:980px){ .card-grid{grid-template-columns:repeat(2,1fr);} } @media(max-width:560px){ .card-grid{grid-template-columns:1fr;} }
+  
+  .dest-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:40px;} 
+  .dest-tab{font-family:var(--mono); font-size:0.76rem; letter-spacing:0.04em; padding:10px 18px; border:1px solid var(--line); border-radius:2px; cursor:pointer; background:transparent; color:var(--ink-soft); transition:all .2s ease;} 
+  .dest-tab.active, .dest-tab:hover{background:var(--ink); color:var(--white); border-color:var(--ink);}
+  
+  .dest-panel{display:none; grid-template-columns:1fr 1fr; gap:56px; align-items:start;} 
+  .dest-panel.active{display:grid;} 
+  .dest-panel .visual{aspect-ratio:4/3.1; border-radius:3px; background-size:cover; background-position:center; position:relative; overflow:hidden;} 
+  .dest-panel .visual .badge{position:absolute; bottom:16px; left:16px; background:rgba(16,46,74,0.85); color:var(--white); font-family:var(--mono); font-size:0.68rem; padding:6px 12px; letter-spacing:0.06em;} 
+  .dest-panel h3{font-size:1.7rem; margin-bottom:14px;} 
+  @media(max-width:860px){ .dest-panel{grid-template-columns:1fr;} }
+  
+  .culture-subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+  .culture-subgrid a { border: 1px solid var(--line); padding: 8px 12px; border-radius: 20px; font-size: 12px; display: inline-block; transition: background .2s ease, color .2s ease; }
+  .culture-subgrid a:hover { background: var(--ink); color: var(--white); }
+  .culture-subgrid a.kingdom { border-color: var(--gold); }
+
+  .grid-2col{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;} @media(max-width:768px){ .grid-2col{grid-template-columns:1fr;} }
+  .stay-card-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:30px;} @media(max-width:900px){ .stay-card-grid{grid-template-columns:1fr;} }
+  .stay-card{border:1px solid var(--line); border-radius:6px; padding:24px; background:var(--white); transition:transform .3s ease, box-shadow .3s ease;} .stay-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .stay-card h4{font-size:1.2rem; margin-bottom:8px;} .stay-card p{font-size:0.9rem; color:#555; margin-bottom:16px;}
+
+  .feedback-form{background:var(--sand); padding:36px; border-radius:6px; border:1px solid var(--line); margin-top:30px;}
+  .feedback-form .form-group{margin-bottom:18px;}
+  .feedback-form label{display:block; font-family:var(--mono); font-size:0.78rem; text-transform:uppercase; margin-bottom:6px; color:var(--ink);}
+  .feedback-form input, .feedback-form select, .feedback-form textarea{width:100%; padding:12px; border:1px solid var(--line); border-radius:3px; font-family:var(--body); font-size:0.9rem;}
+  
+  .partners-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:24px; align-items:center; text-align:center; padding-top:20px;}
+  .partner-logo{background:rgba(251,253,255,0.08); border:1px solid rgba(251,253,255,0.12); padding:16px; border-radius:4px; color:var(--sand); font-family:var(--mono); font-size:0.8rem; display: flex; align-items: center; justify-content: center; min-height: 70px;}
+  .partner-logo img{max-height: 38px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.85; transition: opacity .2s ease;}
+  .partner-logo img:hover{opacity: 1;}
+
+  footer{background:var(--ink); color:rgba(251,253,255,0.75); padding:70px 0 30px;} .foot-grid{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(251,253,255,0.12);} .foot-grid h5{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:18px;} .foot-grid li{padding:6px 0; font-size:0.85rem;} .foot-grid li a:hover{color:var(--white);} 
+  .foot-bottom{display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; text-align:left; padding-top:24px; font-size:0.78rem; gap:6px;} 
+  @media(max-width:900px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body id="home">
+
+<!-- Top Bar with Social Media Icons -->
+<div class="top-bar">
+  <div class="top-bar-contact">
+    <span><i class="fa-solid fa-envelope"></i> info@southsudantourism.gov.ss</span>
+    <span><i class="fa-solid fa-phone"></i> +211 900 000 000</span>
+  </div>
+  <div class="top-bar-socials">
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="#home" class="brand">
+      <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+      <span class="brand-text">Ministry Of Wildlife <span>Conservation and Tourism</span></span>
+    </a>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      
+      <div class="nav-dropdown">
+        <a href="#about">About ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">ORGANIZATION</div>
+          <a href="about.html?slug=about-us">About Us</a>
+          <a href="about.html">Meet the Team</a>
+          <a href="about.html">Vision, Mission & Values</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <a href="#destinations">Destinations ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">WILDLIFE & NATURE</div>
+          <a href="destination-single.html?slug=great-nile-migration">Great Nile Migration</a>
+          <a href="destination-single.html?slug=boma-badingilo">Boma–Badingilo</a>
+          <a href="destination-single.html?slug=sudd-wetlands">Jonglei / Sudd</a>
+          <a href="destination-single.html?slug=nimule-national-park">Nimule National Park</a>
+          <a href="destination-single.html?slug=imatong-mountains">Imatong Mountains</a>
+          <a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a>
+          <a href="destination-single.html?slug=juba-city-tour">Juba City Tour</a>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-header">CULTURAL TOURS</div>
+          <a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka - Mundari</a>
+          <a href="destination-single.html?slug=kapoeta-cultural-tour">Kapoeta - Toposa</a>
+          <a href="destination-single.html?slug=bor-cultural-tour">Bor - Dinka</a>
+          <a href="destination-single.html?slug=torit-cultural-tour">Torit - Lotuko</a>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-header">KINGDOMS</div>
+          <a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a>
+          <a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a>
+          <a href="destination-single.html?slug=anyuak-kingdom">Anyuak Kingdom</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <a href="wildlife.html">Wildlife ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">FAUNA & SPECIES</div>
+          <a href="wildlife-animals.html">Animals</a>
+          <a href="wildlife-birds.html">Birds</a>
+        </div>
+      </div>
+
+      <a href="#culture">Culture</a>
+
+      <div class="nav-dropdown">
+        <a href="gallery.html">Gallery & Media ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">RESOURCES & NEWS</div>
+          <a href="gallery.html">Gallery</a>
+          <a href="press-release.html">Press Releases</a>
+          <a href="tenders.html">Bids & Tenders</a>
+          <a href="news.html">News Articles</a>
+        </div>
+      </div>
+
+      <a href="operators.html">Operators</a>
+      <a href="industry.html">Investment</a>
+      <a href="#where-to-stay">Where to Stay</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="permits.html" class="btn btn-primary">Get a Permit</a>
+      <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="about.html">Meet the Team</a>
+    <a href="about.html">Our Vision & Mission</a>
+    <a href="#destinations">Destinations</a>
+    <a href="wildlife-animals.html">Wildlife - Animals</a>
+    <a href="wildlife-birds.html">Wildlife - Birds</a>
+    <a href="#culture">Culture</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="press-release.html">Press Releases</a>
+    <a href="tenders.html">Bids & Tenders</a>
+    <a href="news.html">News Articles</a>
+    <a href="operators.html">Operators</a>
+    <a href="industry.html">Investment</a>
+    <a href="#where-to-stay">Where to Stay</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="permits.html">Get a Permit</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-herds" style="background:url('images/Boma\ mountains.jpeg') center/cover;"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow">Republic of South Sudan - Ministry of Wildlife Conservation and Tourism</div>
+    <h1>Discover South Sudan.<br><em>Where the Nile meets the wild.</em></h1>
+    <p class="hero-sub">Home to Africa's largest wetland, a migration bigger than Serengeti's, sacred mountains over Juba, and cultures living alongside this land for generations.</p>
+    <div class="hero-actions">
+      <a href="#destinations" class="btn btn-primary">Explore Destinations</a>
+      <a href="plan-your-visit.html" class="btn btn-ghost">Plan Your Visit</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="hero-stat-num">6M+</span><span class="hero-stat-label">Animals in migration</span></div>
+      <div><span class="hero-stat-num">3,187m</span><span class="hero-stat-label">Imatong - highest peak</span></div>
+      <div><span class="hero-stat-num">64</span><span class="hero-stat-label">Ethnic communities & Kingdoms</span></div>
+      <div><span class="hero-stat-num">15</span><span class="hero-stat-label">Destinations total</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="current-divider"><svg class="current" viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0 20 Q 60 5, 120 20 T 240 20 T 360 20 T 480 20 T 600 20 T 720 20 T 840 20 T 960 20 T 1080 20 T 1200 20"/></svg></div>
+
+<section class="section-pad bg-white" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">About Our Organization</div>
+        <h2>Ministry of Wildlife Conservation & Tourism</h2>
+      </div>
+      <p>Dedicated to sustainable tourism, environmental preservation, and structural eco-development in South Sudan.</p>
+    </div>
+    <div class="reveal">
+      <p>The Ministry of Wildlife Conservation and Tourism is committed to protecting South Sudan’s natural heritage, preserving its world-renowned ecosystems, and facilitating responsible, community-focused tourism. Through strategic partnerships and active conservation efforts, we safeguard our national parks and wildlife corridors for generations to come.</p>
+      <a href="about.html" class="btn btn-dark" style="margin-top:20px">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad bg-sand">
+  <div class="wrap">
+    <div class="section-head reveal"><div><div class="eyebrow">Featured Experiences</div>
+    <h2>Eight ways to meet South Sudan</h2>
+    <p>From migration to mountains to sacred hills above Juba.</p>
+  </div>
+    <div class="card-grid">
+      <a class="exp-card reveal" href="destination-single.html?slug=great-nile-migration" style="background-image:url('images/Antelopes\ migration.jpeg')"><div class="tag">Wildlife</div><h4>Great Nile Migration</h4></a>
+      <a class="exp-card reveal" href="destination-single.html?slug=imatong-mountains" style="background-image:url('images/Imatong\ mountain.jpg')"><div class="tag">NEW • Mountains</div><h4>Imatong Mountains</h4></a>
+      <a class="exp-card reveal" href="destination-single.html?slug=jebel-kujur" style="background-image:url('images/Boma\ mountains.jpeg')"><div class="tag">NEW • Sacred</div><h4>Jebel Kujur</h4></a>
+      <a class="exp-card reveal" href="destination-single.html?slug=juba-city-tour" style="background-image:url('images/Juba.jpg')"><div class="tag">NEW • City</div><h4>Juba City Tour</h4></a>
+      <a class="exp-card reveal" href="destination-single.html?slug=boma-badingilo" style="background-image:url('images/Migration\ G10.jpeg')"><div class="tag">Flagship</div><h4>Boma–Badingilo</h4></a>
+      <a class="exp-card reveal" href="destination-single.html?slug=sudd-wetlands" style="background-image:url('images/Sudd\ wetlands.jpg')"><div class="tag">Wetland</div><h4>The Sudd / Jonglei</h4></a>
+      <a class="exp-card reveal" href="destination-single.html?slug=nimule-national-park" style="background-image:url('images/Elephants\ in\ Nimule.jpg')"><div class="tag">Accessible</div><h4>Nimule National Park</h4></a>
+      <a class="exp-card reveal" href="#culture" style="background-image:url('images/Boma\ Plateau.jpeg')"><div class="tag">Kingdoms</div><h4>8 Cultural Tours</h4></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad bg-white" id="destinations">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">Destinations</div>
+      <h2>Landscapes & Heritage</h2>
+      <p>Wildlife parks, sacred mountains, city heritage, and living kingdoms.</p>
+    </div>
+    </div>
+    
+    <!-- Tab Buttons -->
+    <div class="dest-tabs reveal" id="destTabs">
+      <button class="dest-tab active" data-target="dest-migration">Migration</button>
+      <button class="dest-tab" data-target="dest-imatong">Imatong Mountains</button>
+      <button class="dest-tab" data-target="dest-kujur">Jebel Kujur</button>
+      <button class="dest-tab" data-target="dest-juba">Juba City Tour</button>
+      <button class="dest-tab" data-target="dest-boma">Boma–Badingilo</button>
+      <button class="dest-tab" data-target="dest-nimule">Nimule</button>
+      <button class="dest-tab" data-target="dest-culture-tab">Cultural & Kingdoms</button>
+    </div>
+
+    <!-- Tab Panels -->
+    <div class="dest-panel active" id="dest-migration">
+      <div class="visual" style="background-image:url('images/Migration\ G12.jpeg')"><span class="badge">Peak Nov–Mar</span></div>
+      <div><h3>Great Nile Migration</h3><p>6 million animals - world's largest mammal migration.</p><a href="destination-single.html?slug=great-nile-migration" class="btn btn-dark" style="margin-top:20px">Explore →</a></div>
+    </div>
+    
+    <div class="dest-panel" id="dest-imatong">
+      <div class="visual" style="background-image:url('images/Imatong.jpg')"><span class="badge">NEW • 3,187m</span></div>
+      <div><h3>Imatong Mountains - Roof of South Sudan</h3><p>Mount Kinyeti 3,187m, alpine forests, waterfalls, Lotuko villages.</p><a href="destination-single.html?slug=imatong-mountains" class="btn btn-dark" style="margin-top:20px">Explore Imatong →</a></div>
+    </div>
+    
+    <div class="dest-panel" id="dest-kujur">
+      <div class="visual" style="background-image:url('images/Boma\ mountains.jpeg')"><span class="badge">NEW • Sacred</span></div>
+      <div><h3>Jebel Kujur</h3><p>Sacred Bari mountain, 45-min sunset hike, 360° view of Juba & White Nile.</p><a href="destination-single.html?slug=jebel-kujur" class="btn btn-dark" style="margin-top:20px">Explore Jebel Kujur →</a></div>
+    </div>
+    
+    <div class="dest-panel" id="dest-juba">
+      <div class="visual" style="background-image:url('images/Juba.jpg')"><span class="badge">NEW • City</span></div>
+      <div><h3>Juba City Tour</h3><p>Konyo Konyo Market, Garang Mausoleum, Nile front, Jebel Kujur sunset.</p><a href="destination-single.html?slug=juba-city-tour" class="btn btn-dark" style="margin-top:20px">Explore Juba →</a></div>
+    </div>
+    
+    <div class="dest-panel" id="dest-boma">
+      <div class="visual" style="background-image:url('images/Boma\ Plateau.jpeg')"><span class="badge">Flagship</span></div>
+      <div><h3>Boma–Badingilo</h3><p>Core migration corridor, 31,000km².</p><a href="destination-single.html?slug=boma-badingilo" class="btn btn-dark" style="margin-top:20px">Explore →</a></div>
+    </div>
+    
+    <div class="dest-panel" id="dest-nimule">
+      <div class="visual" style="background-image:url('images/Elephants\ in\ Nimule.jpg')"><span class="badge">Road accessible</span></div>
+      <div><h3>Nimule National Park</h3><p>White Nile rapids, elephants crossing.</p><a href="destination-single.html?slug=nimule-national-park" class="btn btn-dark" style="margin-top:20px">Explore →</a></div>
+    </div>
+    
+    <div class="dest-panel" id="dest-culture-tab">
+      <div class="visual" style="background-image:url('images/Sudd\ wetlands.jpg')"><span class="badge">8 tours • 3 kingdoms</span></div>
+      <div>
+        <h3>Cultural Tours & Kingdoms</h3>
+        <p>Immerse yourself in authentic traditions, cattle-keeping communities, and ancient monarchies.</p>
+        <div class="culture-subgrid">
+          <a href="destination-single.html?slug=terekeka-cultural-tour" class="Culture">Terekeka →</a>
+          <a href="destination-single.html?slug=kapoeta-cultural-tour" class="Culture">Kapoeta →</a>
+          <a href="destination-single.html?slug=bor-cultural-tour" class="Culture">Bor →</a>
+          <a href="destination-single.html?slug=torit-cultural-tour" class="Culture">Torit →</a>
+          <a href="destination-single.html?slug=zande-kingdom" class="kingdom">Zande →</a>
+          <a href="destination-single.html?slug=chollo-kingdom" class="kingdom">Chollo →</a>
+          <a href="destination-single.html?slug=anyuak-kingdom" class="kingdom">Anyuak →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Required JavaScript to Handle Tab Switching -->
+<script>
+  const tabs = document.querySelectorAll('.dest-tab'); 
+  const destPanels = document.querySelectorAll('.dest-panel');
+  
+  tabs.forEach(tab => { 
+    tab.addEventListener('click', () => { 
+      // Remove active states from all tabs and panels
+      tabs.forEach(t => t.classList.remove('active')); 
+      destPanels.forEach(p => p.classList.remove('active')); 
+      
+      // Add active state to clicked tab
+      tab.classList.add('active'); 
+      
+      // Target and display corresponding panel
+      const targetPanel = document.getElementById(tab.dataset.target);
+      if(targetPanel) {
+        targetPanel.classList.add('active'); 
+      }
+    }); 
+  });
+</script>
+
+<section class="section-pad bg-sand" id="wildlife">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Conservation & Ecosystems</div>
+        <h2>Wildlife Protection</h2>
+        <p>Safeguarding Africa's largest mammal migration across 200,000 km^2 of protected wilderness, savannah corridors, and vital wetland ecosystems. This expansive conservation framework spans the Boma-Badingilo landscape and the Sudd wetlands, serving as the seasonal transit route for over six million white-eared kob, tiang, and Mongalla gazelle.</p>
+      </div>
+    </div>
+    <div class="grid-2col reveal">
+      <div>
+        <h3>Vast Wilderness & Biodiversity</h3>
+        <p>South Sudan hosts tiang, white-eared kob, Mongalla gazelle, elephants, lions, and hundreds of bird species. The Ministry works with global conservation partners to protect migration corridors and stop illegal poaching.</p>
+        <a href="about.html" class="btn btn-dark">View Protection Protocols</a>
+      </div>
+      <div>
+        <img src="images/Antelopes migration.jpeg" alt="South Sudan Wildlife Migration" style="border-radius:5px; width:100%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad bg-white" id="culture">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Heritage & Kingdoms</div>
+        <h2>Living Culture & Heritage</h2>
+        <p>Discover 64 ethnic communities with rich traditions, ancient kingdoms, and pastoral life closely linked with nature.</p>
+      </div>
+      
+    </div>
+    <div class="card-grid reveal">
+      <a class="exp-card" href="destination-single.html?slug=terekeka-cultural-tour" style="background-image:url('images/Boma\ Plateau.jpeg')"><div class="tag">Mundari</div><h4>Terekeka Culture</h4></a>
+      <a class="exp-card" href="destination-single.html?slug=zande-kingdom" style="background-image:url('images/Sudd\ wetlands.jpg')"><div class="tag">Kingdom</div><h4>Zande Kingdom</h4></a>
+      <a class="exp-card" href="destination-single.html?slug=chollo-kingdom" style="background-image:url('images/Boma\ mountains.jpeg')"><div class="tag">Kingdom</div><h4>Chollo Kingdom</h4></a>
+      <a class="exp-card" href="destination-single.html?slug=kapoeta-cultural-tour" style="background-image:url('images/Imatong\ mountain.jpg')"><div class="tag">Toposa</div><h4>Kapoeta Heritage</h4></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad bg-sand" id="where-to-stay">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Accommodation</div>
+        <h2>Where to Stay</h2>
+        <p>Comfortable international hotels in Juba, eco-lodges along the Nile, and mobile safari camps in the wilderness.</p>
+      </div>
+      
+    </div>
+    <div class="stay-card-grid reveal">
+      <div class="stay-card">
+        <h4>Juba City Hotels</h4>
+        <p>Luxury and boutique hotels overlooking the Nile, complete with business amenities and airport transfers.</p>
+        <a href="where-to-stay.html#accommodations" class="btn btn-dark">Explore Hotels</a>
+      </div>
+      <div class="stay-card">
+        <h4>Eco-Lodges & Nile Camps</h4>
+        <p>Sustainable riverfront lodges and permanent tented camps providing scenic Nile views and nature access.</p>
+        <a href="where-to-stay.html#lodges" class="btn btn-dark">Explore Lodges</a>
+      </div>
+      <div class="stay-card">
+        <h4>Mobile Expedition Camps</h4>
+        <p>Fully organized, eco-friendly mobile camps set up by licensed tour operators during wilderness migrations.</p>
+        <a href="where-to-stay.html" class="btn btn-dark">View Safari Camps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad bg-white" id="feedback">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Service Improvement</div>
+        <h2>Service Standard Feedback Form</h2>
+        <p>Help us improve tourism standard services, permits, and conservation experiences in South Sudan.</p>
+      </div>
+      
+    </div>
+    <form class="feedback-form reveal" onsubmit="event.preventDefault(); alert('Thank you for your feedback!');">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required placeholder="John Doe">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required placeholder="john@example.com">
+      </div>
+      <div class="form-group">
+        <label for="category">Feedback Category</label>
+        <select id="category">
+          <option value="permit">Permits & E-Visa Services</option>
+          <option value="operator">Licensed Tour Operators</option>
+          <option value="park">National Parks & Wildlife</option>
+          <option value="other">General Inquiries</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Feedback / Comments</label>
+        <textarea id="message" rows="4" required placeholder="Share your experience or recommendations..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+  </div>
+</section>
+
+<!-- Partners Section with Logos -->
+<section class="section-pad bg-ink" id="partners">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Collaboration</div>
+        <h2>Our Strategic Partners</h2>
+        <p>Working together with international bodies and local organizations to protect biodiversity and promote heritage.</p>
+      </div>
+      
+    </div>
+    <div class="partners-grid reveal">
+      <div class="partner-logo"><img src="images/African parks Logo PNG.png" alt="African Parks Logo"></div>
+      <div class="partner-logo"><img src="images/UN tourism Logo.png" alt="UN Tourism Logo"></div>
+      <div class="partner-logo"><img src="images/USAID Logo.png" alt="USAID Logo"></div>
+      <div class="partner-logo"><img src="images/WWF Logo.png" alt="WWF Logo"></div>
+      <div class="partner-logo"><img src="images/UNESCO Logo.png" alt="UNESCO Logo"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="color:#fff; margin-bottom:16px;">
+          <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+          <span class="brand-text">Ministry of Wildlife<span>Conservation and Tourism</span></span>
+        </div>
+        
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="destination-single.html?slug=imatong-mountains">Imatong Mountains</a></li>
+          <li><a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a></li>
+          <li><a href="gallery.html">Gallery & Media</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Cultural</h5>
+        <ul>
+          <li><a href="#culture">Living Culture</a></li>
+          <li><a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka</a></li>
+          <li><a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a></li>
+          <li><a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="permits.html">Entry Permits & E-Visas</a></li>
+          <li><a href="permits.html#filming">Filming & Drone Permits</a></li>
+          <li><a href="operators.html">Tour Operators</a></li>
+          <li><a href="#where-to-stay">Where to Stay</a></li>
+          <li><a href="industry.html">Tourism Investment</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="contact.html">Contact Us Form</a></li>
+          <li>info@southsudantourism.gov.ss</li>
+          <li>+211900000000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Directorate of Tourism South Sudan</span>
+      <span class="mono"><a href="#home">Back to Top ↑</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Widget -->
+<a href="https://wa.me/+256765542041?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20tourism%20and%20permits%20in%20South%20Sudan." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <span class="whatsapp-tooltip">Chat with us</span>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script src="js/main.js"></script>
+<script>
+  const burger = document.getElementById('burger'); 
+  const mobileMenu = document.getElementById('mobileMenu');
+  if(burger && mobileMenu) {
+    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  }
+  
+  const destTabs = document.querySelectorAll('.dest-tab'); 
+  const panels = document.querySelectorAll('.dest-panel');
+  destTabs.forEach(tab => { 
+    tab.addEventListener('click', () => { 
+      destTabs.forEach(t => t.classList.remove('active')); 
+      panels.forEach(p => p.classList.remove('active')); 
+      tab.classList.add('active'); 
+      const targetPanel = document.getElementById(tab.dataset.target);
+      if(targetPanel) targetPanel.classList.add('active'); 
+    }); 
+  });
+  
+  const revealEls = document.querySelectorAll('.reveal'); 
+  const io = new IntersectionObserver((entries) => { 
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) { 
+        entry.target.classList.add('in'); 
+        io.unobserve(entry.target); 
+      } 
+    }); 
+  }, { threshold: 0.15 }); 
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

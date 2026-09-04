@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Destinations — Ministry of Wildlife Conservation and Tourism</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root{
+      --ink:#102E4A; --ink-soft:#1A2E3A; --gold:#4AA8E0; --gold-bright:#87CFF5;
+      --wetland:#2E7DA6; --clay:#3A8FB7; --sand:#EDF6FC; --sand-deep:#D6EBF8;
+      --white:#FBFDFF; --line:rgba(16,46,74,0.12); --shadow: 0 12px 40px rgba(16,46,74,0.12);
+      --display: 'Fraunces', serif; --body: 'Work Sans', sans-serif; --mono: 'IBM Plex Mono', monospace;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0; font-family:var(--body); color:var(--ink-soft); background:var(--white); -webkit-font-smoothing:antialiased;}
+    h1,h2,h3,h4{font-family:var(--display); margin:0; color:var(--ink); font-weight:600; letter-spacing:-0.01em;}
+    p{line-height:1.65; margin:0 0 1em;} a{color:inherit; text-decoration:none;} ul{margin:0; padding:0; list-style:none;} img{max-width:100%; display:block;}
+    .mono{font-family:var(--mono); letter-spacing:0.02em;}
+    .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px);}
+
+    .eyebrow{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--wetland); display:flex; align-items:center; gap:0.6em; margin-bottom:0.9em;}
+    .eyebrow::before{content:""; width:22px; height:1px; background:var(--gold); display:inline-block;}
+
+    header{position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(16,46,74,0.92); backdrop-filter:blur(6px); border-bottom:1px solid rgba(251,253,255,0.08);}
+    .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
+    .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;}
+    .brand-logo-img{height:82px; width:auto; object-fit:contain; flex:none;}
+    .brand-text{font-family:var(--display); font-size:1.35rem; font-weight:700; line-height:1.1; letter-spacing:-0.01em;}
+    .brand-text span{display:block; font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; color:var(--gold-bright); text-transform:uppercase; margin-top:3px; font-weight:500;}
+
+    nav.links{display:flex; gap:24px; align-items:center; margin-right:28px;}
+    nav.links a{color:var(--sand); font-size:0.86rem; font-weight:500; position:relative; padding:4px 0;}
+    nav.links a:hover{color:var(--white);}
+    nav.links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold-bright); transition:width .25s ease;}
+    nav.links a:hover::after{width:100%;}
+    
+    .nav-dropdown{position:relative;}
+    .nav-dropdown:hover .dropdown-menu{display:block;}
+    .dropdown-menu{display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%); background:#fff; min-width:260px; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.2); padding:10px 0; z-index:99;}
+    .dropdown-menu a{display:block; padding:9px 16px; font-size:13px; color:#222 !important;}
+    .dropdown-menu a:hover{background:var(--sand); color:var(--ink) !important;}
+    .dropdown-header{display:block; padding:8px 16px 4px 16px; font-size:10px; font-weight:800; letter-spacing:1px; color:var(--wetland) !important; font-family:var(--mono); text-transform:uppercase;}
+    .dropdown-divider{height:1px; background:#eee; margin:6px 0;}
+    
+    .nav-cta{display:flex; align-items:center; gap:14px;}
+    .btn{display:inline-flex; align-items:center; gap:0.5em; padding:0.85em 1.6em; border-radius:2px; font-size:0.92rem; font-weight:600; letter-spacing:0.02em; border:1px solid transparent; cursor:pointer; transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;}
+    .btn-primary{background:var(--gold); color:#fff;}
+    .btn-primary:hover{background:var(--wetland); transform:translateY(-2px);}
+    .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px;}
+    .burger span{width:22px; height:2px; background:var(--white); display:block;}
+    .mobile-menu{display:none; flex-direction:column; background:var(--ink); padding:10px 24px 26px;}
+    .mobile-menu a{color:var(--sand); padding:12px 0; border-bottom:1px solid rgba(251,253,255,0.08); font-size:0.95rem;}
+    .mobile-menu.open{display:flex;}
+    @media(max-width:1020px){ nav.links{display:none;} .nav-cta .btn{display:none;} .burger{display:flex;} }
+
+    .page-header{padding:180px 0 60px; background:var(--ink); color:var(--white);}
+    .section-pad{padding:80px 0;}
+    .dest-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; margin-top:32px;}
+    .dest-card{border:1px solid var(--line); border-radius:4px; overflow:hidden; background:var(--white); transition:transform 0.3s ease, box-shadow 0.3s ease;}
+    .dest-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+    .dest-card-img{height:220px; background-size:cover; background-position:center; position:relative;}
+    .dest-card-badge{position:absolute; top:12px; right:12px; background:rgba(16,46,74,0.85); color:var(--white); font-family:var(--mono); font-size:0.7rem; padding:4px 10px; border-radius:2px;}
+    .dest-card-body{padding:24px;}
+    .dest-card-body h3{font-size:1.3rem; margin-bottom:8px;}
+    .dest-card-body p{font-size:0.92rem; color:var(--ink-soft); margin-bottom:16px;}
+    .tag-list{display:flex; gap:8px; flex-wrap:wrap;}
+    .tag{font-family:var(--mono); font-size:0.7rem; background:var(--sand); color:var(--wetland); padding:4px 8px; border-radius:2px;}
+
+    footer{background:var(--ink); color:rgba(251,253,255,0.75); padding:70px 0 30px; text-align:left;}
+    .foot-grid{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(251,253,255,0.12);}
+    .foot-grid h5{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:18px;}
+    .foot-grid li{padding:6px 0; font-size:0.85rem;}
+    .foot-grid li a:hover{color:var(--white);}
+    .foot-bottom{display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; text-align:left; padding-top:24px; font-size:0.78rem; gap:6px;}
+    @media(max-width:900px){ .dest-grid{grid-template-columns:1fr 1fr;} .foot-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:600px){ .dest-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body id="top">
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+      <span class="brand-text">Ministry Of Wildlife <span>Conservation and Tourism</span></span>
+    </a>
+    <nav class="links">
+      <a href="about.html">About</a>
+      <div class="nav-dropdown">
+        <a href="destinations.html">Destinations ▾</a>
+        <div class="dropdown-menu">
+          <span class="dropdown-header">WILDLIFE & NATURE ➔</span>
+          <a href="destination-single.html?slug=great-nile-migration">Great Nile Migration</a>
+          <a href="destination-single.html?slug=boma-badingilo">Boma–Badingilo</a>
+          <a href="destination-single.html?slug=sudd-wetlands">Jonglei / Sudd</a>
+          <a href="destination-single.html?slug=nimule-national-park">Nimule National Park</a>
+          <a href="destination-single.html?slug=imatong-mountains">Imatong Mountains</a>
+          <a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a>
+          <a href="destination-single.html?slug=juba-city-tour">Juba City Tour</a>
+          
+          <div class="dropdown-divider"></div>
+          
+          <span class="dropdown-header">CULTURAL TOURS ➔</span>
+          <a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka - Mundari</a>
+          <a href="destination-single.html?slug=kapoeta-cultural-tour">Kapoeta - Toposa</a>
+          <a href="destination-single.html?slug=bor-cultural-tour">Bor - Dinka</a>
+          <a href="destination-single.html?slug=torit-cultural-tour">Torit - Lotuko</a>
+          
+          <div class="dropdown-divider"></div>
+          
+          <span class="dropdown-header">KINGDOMS ➔</span>
+          <a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a>
+          <a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a>
+          <a href="destination-single.html?slug=anyuak-kingdom">Anyuak Kingdom</a>
+        </div>
+      </div>
+      <a href="index.html#wildlife">Wildlife</a>
+      <a href="index.html#culture">Culture</a>
+      <a href="gallery.html">Gallery & Media</a>
+      <a href="operators.html">Operators</a>
+      <a href="industry.html">Investment</a>
+      <a href="index.html#where-to-stay">Where to Stay</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="permits.html" class="btn btn-primary">Get a Permit</a>
+      <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="about.html">About</a>
+    <a href="destinations.html">Destinations</a>
+    <a href="index.html#wildlife">Wildlife</a>
+    <a href="index.html#culture">Culture</a>
+    <a href="gallery.html">Gallery & Media</a>
+    <a href="operators.html">Operators</a>
+    <a href="industry.html">Investment</a>
+    <a href="index.html#where-to-stay">Where to Stay</a>
+    <a href="index.html#plan">Plan Your Visit</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="permits.html">Get a Permit</a>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <div style="font-family:var(--mono); font-size:0.8rem; color:var(--gold-bright); margin-bottom:12px;">DIRECTORY</div>
+    <h1>All Destinations & Expeditions</h1>
+    <p style="max-width:560px; color:var(--sand); margin-top:12px;">Explore national parks, sacred highlands, living kingdoms, and ancient cultural heritage across South Sudan.</p>
+  </div>
+</section>
+
+<!-- SECTION 1: WILDLIFE & NATURE -->
+<section class="section-pad" id="wildlife-nature">
+  <div class="wrap">
+    <div class="eyebrow">Ecosystems & National Parks</div>
+    <h2>Wildlife & Nature</h2>
+    <div class="dest-grid">
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Antelopes migration.jpeg');">
+          <span class="dest-card-badge">Wildlife</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Great Nile Migration</h3>
+          <p>Witness 6 million antelopes and gazelles move through Boma-Badingilo landscape ecosystem.</p>
+          <div class="tag-list"><span class="tag">Flagship</span><span class="tag">Nov–Mar</span></div>
+          <a href="destination-single.html?slug=great-nile-migration" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Boma Plateau.jpeg');">
+          <span class="dest-card-badge">Savannah</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Boma–Badingilo</h3>
+          <p>Vast protected wilderness spanning 31,000 km², hosting kob, tiang, gazelles, and safari habitats.</p>
+          <div class="tag-list"><span class="tag">National Park</span><span class="tag">Expedition</span></div>
+          <a href="destination-single.html?slug=boma-badingilo" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Sudd wetlands.jpg');">
+          <span class="dest-card-badge">Wetland</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Jonglei / Sudd Wetlands</h3>
+          <p>One of the world's largest freshwater wetlands. Exceptional birdwatching and riverboat safaris.</p>
+          <div class="tag-list"><span class="tag">RAMSAR Site</span><span class="tag">Boating</span></div>
+          <a href="destination-single.html?slug=sudd-wetlands" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Elephants in Nimule.jpg');">
+          <span class="dest-card-badge">River Park</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Nimule National Park</h3>
+          <p>Situated on the White Nile along the Ugandan border, featuring elephant herds and river cruises.</p>
+          <div class="tag-list"><span class="tag">Nile River</span><span class="tag">Wildlife</span></div>
+          <a href="destination-single.html?slug=nimule-national-park" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Imatong mountain.jpg');">
+          <span class="dest-card-badge">Highland</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Imatong Mountains</h3>
+          <p>Summit Mount Kinyeti (3,187m), navigate dense cloud forests, and explore remote Lotuko hamlets.</p>
+          <div class="tag-list"><span class="tag">Trekking</span><span class="tag">Nature</span></div>
+          <a href="destination-single.html?slug=imatong-mountains" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Jebel Kujur.jpg');">
+          <span class="dest-card-badge">Sacred</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Jebel Kujur</h3>
+          <p>The iconic mountain bordering Juba, revered for spiritual roots and panoramic city sunsets.</p>
+          <div class="tag-list"><span class="tag">Hiking</span><span class="tag">Juba</span></div>
+          <a href="destination-single.html?slug=jebel-kujur" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Juba.jpg');">
+          <span class="dest-card-badge">Urban</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Juba City Tour</h3>
+          <p>Experience the capital city's vibrant markets, historical landmarks, Nile riverfronts, and culture.</p>
+          <div class="tag-list"><span class="tag">Capital</span><span class="tag">Heritage</span></div>
+          <a href="destination-single.html?slug=juba-city-tour" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: CULTURAL TOURS -->
+<section class="section-pad" style="background:var(--sand);" id="cultural-tours">
+  <div class="wrap">
+    <div class="eyebrow">Living Traditions</div>
+    <h2>Cultural Tours</h2>
+    <div class="dest-grid">
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Terekeka.jpg');">
+          <span class="dest-card-badge">Culture</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Terekeka (Mundari Culture)</h3>
+          <p>Immerse in traditional pastoral culture, ash-covered cattle camps, and Nile shorelines.</p>
+          <div class="tag-list"><span class="tag">Mundari</span><span class="tag">Photography</span></div>
+          <a href="destination-single.html?slug=terekeka-cultural-tour" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Imatong mountain.jpg');">
+          <span class="dest-card-badge">Pastoral</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Kapoeta (Toposa Heritage)</h3>
+          <p>Discover traditional architecture, pastoral practices, and ancestral customs in Eastern Equatoria.</p>
+          <div class="tag-list"><span class="tag">Toposa</span><span class="tag">Tradition</span></div>
+          <a href="destination-single.html?slug=kapoeta-cultural-tour" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Sudd wetlands.jpg');">
+          <span class="dest-card-badge">Pastoral</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Bor (Dinka Culture)</h3>
+          <p>Experience pastoral living, ceremonial gatherings, and traditional cattle camp practices in Jonglei.</p>
+          <div class="tag-list"><span class="tag">Dinka</span><span class="tag">Cattle Camp</span></div>
+          <a href="destination-single.html?slug=bor-cultural-tour" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Imatong.jpg');">
+          <span class="dest-card-badge">Highland Culture</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Torit (Lotuko Heritage)</h3>
+          <p>Explore stone village structures, mountain agriculture, and cultural history set against the Imatongs.</p>
+          <div class="tag-list"><span class="tag">Lotuko</span><span class="tag">Villages</span></div>
+          <a href="destination-single.html?slug=torit-cultural-tour" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: KINGDOMS -->
+<section class="section-pad" id="kingdoms">
+  <div class="wrap">
+    <div class="eyebrow">Historic Royal Lineages</div>
+    <h2>Kingdoms</h2>
+    <div class="dest-grid">
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Azande.jpg');">
+          <span class="dest-card-badge">Kingdom</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Azande Kingdom</h3>
+          <p>Discover the historic court traditions, forest ecosystems, and royal heritage of Western Equatoria.</p>
+          <div class="tag-list"><span class="tag">History</span><span class="tag">Monarchy</span></div>
+          <a href="destination-single.html?slug=zande-kingdom" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Chollo King.jpg');">
+          <span class="dest-card-badge">Kingdom</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Chollo (Shilluk) Kingdom</h3>
+          <p>Visit Upper Nile's historic monarchical seat, sacred reth traditions, and settlements along the Nile.</p>
+          <div class="tag-list"><span class="tag">Reth Seat</span><span class="tag">Upper Nile</span></div>
+          <a href="destination-single.html?slug=chollo-kingdom" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-card-img" style="background-image:url('images/Anyuak King.jpg');">
+          <span class="dest-card-badge">Kingdom</span>
+        </div>
+        <div class="dest-card-body">
+          <h3>Anyuak Kingdom</h3>
+          <p>Discover eastern South Sudan's royal village structures, court customs, and historic river trade legacy.</p>
+          <div class="tag-list"><span class="tag">Royal</span><span class="tag">Heritage</span></div>
+          <a href="destination-single.html?slug=anyuak-kingdom" style="display:inline-block; margin-top:16px; font-weight:600; color:var(--wetland);">View Details →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="color:#fff; margin-bottom:16px;">
+          <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+          <span class="brand-text">Ministry of Wildlife<span>Conservation and Tourism</span></span>
+        </div>
+        <p style="font-size:0.85rem; max-width:260px;">Preserving South Sudan's Nature and Cultural Heritage</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="destination-single.html?slug=imatong-mountains">Imatong Mountains</a></li>
+          <li><a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a></li>
+          <li><a href="gallery.html">Gallery & Media</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Cultural</h5>
+        <ul>
+          <li><a href="index.html#culture">Living Culture</a></li>
+          <li><a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka</a></li>
+          <li><a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a></li>
+          <li><a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="permits.html">Entry Permits & E-Visas</a></li>
+          <li><a href="permits.html#filming">Filming & Drone Permits</a></li>
+          <li><a href="operators.html">Tour Operators</a></li>
+          <li><a href="index.html#where-to-stay">Where to Stay</a></li>
+          <li><a href="industry.html">Tourism Investment</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="contact.html">Contact Us Form</a></li>
+          <li>info@southsudantourism.gov.ss</li>
+          <li>+211900000000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Directorate of Tourism South Sudan</span>
+      <span class="mono"><a href="#top">Back to Top ↑</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  }
+</script>
+</body>
+</html>
