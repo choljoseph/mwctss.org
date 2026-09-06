@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,29 +22,29 @@
     .mono{font-family:var(--mono); letter-spacing:0.02em;}
     .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px);}
 
-    /* Shared Header Navigation */
-    header{position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(16,46,74,0.92); backdrop-filter:blur(6px); border-bottom:1px solid rgba(251,253,255,0.08);}
+    /* Transparent Header Navigation */
+    header{position:fixed; top:0; left:0; right:0; z-index:100; background:transparent; backdrop-filter:none; border-bottom:1px solid rgba(251,253,255,0.15);}
     .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
     .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;}
     .brand-logo-img{height:82px; width:auto; object-fit:contain; flex:none;}
     .brand-text{font-family:var(--display); font-size:1.35rem; font-weight:700; line-height:1.1; letter-spacing:-0.01em;}
     .brand-text span{display:block; font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; color:var(--gold-bright); text-transform:uppercase; margin-top:3px; font-weight:500;}
 
-    nav.links{display:flex; gap:24px; align-items:center; margin-right:28px;}
+    nav.links{display:flex; gap:24px; align-items:center;}
     nav.links a{color:var(--sand); font-size:0.86rem; font-weight:500; position:relative; padding:4px 0;}
     nav.links a:hover, nav.links a.active{color:var(--white);}
     nav.links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold-bright); transition:width .25s ease;}
     nav.links a:hover::after, nav.links a.active::after{width:100%;}
     
-    .nav-dropdown{position:relative}
-    .nav-dropdown:hover .dropdown-menu{display:block}
-    .dropdown-menu{display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%); background:#fff; min-width:260px; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.2); padding:10px 0; z-index:99}
-    .dropdown-menu a{display:block; padding:9px 16px; font-size:13px; color:#222 !important}
-    .dropdown-menu a:hover{background:var(--sand); color:var(--ink) !important}
+    .nav-dropdown{position:relative;}
+    .nav-dropdown:hover .dropdown-menu{display:block;}
+    .dropdown-menu{display:none; position:absolute; top:100%; left:0; background:#fff; min-width:240px; border-radius:8px; box-shadow:0 20px 50px rgba(0,0,0,0.2); padding:10px 0; z-index:99;}
+    .dropdown-menu a{display:block; padding:9px 16px; font-size:13px; color:#222 !important;}
+    .dropdown-menu a:hover, .dropdown-menu a.active{background:var(--sand); color:var(--ink) !important;}
+    .dropdown-menu a::after{display:none;}
     .dropdown-header{display:block; padding:8px 16px 4px 16px; font-size:10px; font-weight:800; letter-spacing:1px; color:var(--wetland) !important; font-family:var(--mono); text-transform:uppercase;}
-    .dropdown-divider{height:1px; background:#eee; margin:6px 0}
-    
-    .nav-cta{display:flex; align-items:center; gap:14px;}
+    .dropdown-divider{height:1px; background:#eee; margin:6px 0;}
+
     .btn{display:inline-flex; align-items:center; justify-content:center; gap:0.5em; padding:0.85em 1.6em; border-radius:2px; font-size:0.92rem; font-weight:600; letter-spacing:0.02em; border:1px solid transparent; cursor:pointer; transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;}
     .btn-primary{background:var(--gold); color:#fff;}
     .btn-primary:hover{background:var(--wetland); transform:translateY(-2px);}
@@ -53,7 +53,24 @@
     .mobile-menu{display:none; flex-direction:column; background:var(--ink); padding:10px 24px 26px;}
     .mobile-menu a{color:var(--sand); padding:12px 0; border-bottom:1px solid rgba(251,253,255,0.08); font-size:0.95rem;}
     .mobile-menu.open{display:flex;}
-    @media(max-width:1020px){ nav.links{display:none;} .nav-cta .btn{display:none;} .burger{display:flex;} }
+    @media(max-width:1020px){ nav.links{display:none;} .burger{display:flex;} }
+
+    /* Floating Action Buttons */
+    .floating-permit-btn{
+      position:fixed; bottom:24px; left:24px; z-index:999;
+      background:var(--gold); color:#fff; width:52px; height:52px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 10px 25px rgba(0,0,0,0.3); transition:transform .25s ease, background .25s ease;
+    }
+    .floating-permit-btn:hover{background:var(--wetland); transform:scale(1.08);}
+
+    .floating-whatsapp-btn{
+      position:fixed; bottom:24px; right:24px; z-index:999;
+      background:#25D366; color:#fff; width:52px; height:52px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 10px 25px rgba(0,0,0,0.3); transition:transform .25s ease, background .25s ease;
+    }
+    .floating-whatsapp-btn:hover{background:#1EBE5D; transform:scale(1.08);}
 
     /* Page Header */
     .page-header{padding:180px 0 60px; background:var(--ink); color:#fff;}
@@ -96,6 +113,9 @@
       <div class="nav-dropdown">
         <a href="destinations.html">Destinations ▾</a>
         <div class="dropdown-menu">
+          <a href="wildlife.html">Wildlife</a>
+          <a href="culture.html">Culture</a>
+          <div class="dropdown-divider"></div>
           <a href="destinations.html#wildlife-nature" class="dropdown-header">WILDLIFE & NATURE ➔</a>
           <a href="destination-single.html?slug=great-nile-migration">Great Nile Migration</a>
           <a href="destination-single.html?slug=boma-badingilo">Boma–Badingilo</a>
@@ -117,33 +137,49 @@
           <a href="destination-single.html?slug=anyuak-kingdom">Anyuak Kingdom</a>
         </div>
       </div>
-      <a href="wildlife.html">Wildlife</a>
-      <a href="culture.html">Culture</a>
       <a href="gallery.html">Gallery & Media</a>
-      <a href="operators.html">Operators</a>
-      <a href="industry.html">Investment</a>
+      <div class="nav-dropdown">
+        <a href="industry.html">Investment ▾</a>
+        <div class="dropdown-menu">
+          <a href="operators.html">Operators</a>
+        </div>
+      </div>
       <a href="where-to-stay.html">Where to Stay</a>
       <a href="contact.html" class="active">Contact Us</a>
     </nav>
-    <div class="nav-cta">
-      <a href="permits.html" class="btn btn-primary">Get a Permit</a>
-      <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
-    </div>
+    <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="about.html">About</a>
     <a href="destinations.html">Destinations</a>
-    <a href="wildlife.html">Wildlife</a>
-    <a href="culture.html">Culture</a>
+    <a href="wildlife.html" style="padding-left:16px;">— Wildlife</a>
+    <a href="culture.html" style="padding-left:16px;">— Culture</a>
     <a href="gallery.html">Gallery & Media</a>
-    <a href="operators.html">Operators</a>
     <a href="industry.html">Investment</a>
+    <a href="operators.html" style="padding-left:16px;">— Operators</a>
     <a href="where-to-stay.html">Where to Stay</a>
     <a href="plan-your-visit.html">Plan Your Visit</a>
-    <a href="contact.html">Contact Us</a>
+    <a href="contact.html" class="active">Contact Us</a>
     <a href="permits.html">Get a Permit</a>
   </div>
 </header>
+
+<!-- Floating Permit Button Bottom-Left -->
+<a href="permits.html" class="floating-permit-btn" title="Get a Permit" aria-label="Get a Permit">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+    <polyline points="14 2 14 8 20 8"></polyline>
+    <line x1="12" y1="18" x2="12" y2="12"></line>
+    <line x1="9" y1="15" x2="15" y2="15"></line>
+  </svg>
+</a>
+
+<!-- Floating WhatsApp Button Bottom-Right -->
+<a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.762.459 3.48 1.332 5.001l-1.416 5.166 5.283-1.385c1.472.802 3.136 1.224 4.79 1.225h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.038-5.176-2.925-7.062a9.924 9.924 0 0 0-7.067-2.944zm0 1.66c4.587 0 8.324 3.733 8.325 8.324 0 2.223-.865 4.312-2.438 5.885-1.574 1.573-3.664 2.439-5.887 2.439h-.003c-1.428 0-2.833-.377-4.068-1.09l-.291-.173-3.023.792.807-2.943-.19-.302a8.277 8.277 0 0 1-1.267-4.608c0-4.59 3.736-8.324 8.325-8.324zm4.567 11.233c-.251-.125-1.488-.735-1.718-.818-.23-.084-.397-.125-.565.125-.167.25-.65.818-.797.985-.146.167-.292.188-.543.063-.251-.125-1.059-.39-2.018-1.245-.746-.665-1.25-1.486-1.396-1.737-.146-.25-.016-.385.11-.51.112-.112.251-.292.376-.438.125-.146.167-.25.251-.417.084-.167.042-.313-.021-.438-.063-.125-.565-1.36-.774-1.862-.204-.488-.412-.422-.565-.43h-.481c-.167 0-.438.063-.668.313s-.878.857-.878 2.088c0 1.231.898 2.42 1.023 2.587.125.167 1.768 2.7 4.283 3.786.598.258 1.065.412 1.43.528.601.191 1.148.164 1.58.1.481-.071 1.488-.608 1.697-1.196.209-.588.209-1.09.146-1.196-.062-.105-.229-.167-.48-.292z"/>
+  </svg>
+</a>
 
 <section class="page-header">
   <div class="wrap">
@@ -201,7 +237,6 @@
     </form>
   </div>
 </main>
-
 <footer>
   <div class="wrap">
     <div class="foot-grid">
