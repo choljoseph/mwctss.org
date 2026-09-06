@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -116,6 +116,48 @@
     opacity: 1;
   }
 
+  /* Floating Get Permit Widget */
+  .permit-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: var(--gold);
+    color: #FFF;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .permit-float:hover {
+    background-color: var(--wetland);
+    transform: scale(1.1);
+  }
+  .permit-tooltip {
+    position: absolute;
+    left: 70px;
+    background: #fff;
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .permit-float:hover .permit-tooltip {
+    opacity: 1;
+  }
+
   header{position:fixed; top:37px; left:0; right:0; z-index:100; background:transparent; backdrop-filter:blur(4px); border-bottom:1px solid rgba(251,253,255,0.12);}
   .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
   .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;} 
@@ -174,10 +216,56 @@
   .feedback-form label{display:block; font-family:var(--mono); font-size:0.78rem; text-transform:uppercase; margin-bottom:6px; color:var(--ink);}
   .feedback-form input, .feedback-form select, .feedback-form textarea{width:100%; padding:12px; border:1px solid var(--line); border-radius:3px; font-family:var(--body); font-size:0.9rem;}
   
-  .partners-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:24px; align-items:center; text-align:center; padding-top:20px;}
-  .partner-logo{background:rgba(251,253,255,0.08); border:1px solid rgba(251,253,255,0.12); padding:16px; border-radius:4px; color:var(--sand); font-family:var(--mono); font-size:0.8rem; display: flex; align-items: center; justify-content: center; min-height: 70px;}
-  .partner-logo img{max-height: 38px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.85; transition: opacity .2s ease;}
-  .partner-logo img:hover{opacity: 1;}
+  /* Partners Section Styling - Crisp Logo Rendering Improvements */
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 24px;
+    align-items: center;
+    justify-items: center;
+    padding-top: 24px;
+  }
+  
+  .partner-logo {
+    background: rgba(255, 255, 255, 0.08); /* High contrast backdrop for mixed-color/dark logos */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 18px 24px;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .partner-logo:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: var(--gold-bright);
+    transform: translateY(-3px);
+  }
+
+  .partner-logo img {
+    max-height: 60px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    
+    /* Optimize image rendering for maximum visual sharp/crisp edges */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    
+    /* Remove destructive CSS filters */
+    filter: none;
+    opacity: 0.95;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .partner-logo img:hover {
+    opacity: 1;
+    transform: scale(1.04);
+  }
 
   footer{background:var(--ink); color:rgba(251,253,255,0.75); padding:70px 0 30px;} .foot-grid{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(251,253,255,0.12);} .foot-grid h5{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:18px;} .foot-grid li{padding:6px 0; font-size:0.85rem;} .foot-grid li a:hover{color:var(--white);} 
   .foot-bottom{display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; text-align:left; padding-top:24px; font-size:0.78rem; gap:6px;} 
@@ -201,7 +289,6 @@
     <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
   </div>
 </div>
-
 <header>
   <div class="nav">
     <a href="#home" class="brand">
@@ -221,6 +308,7 @@
         </div>
       </div>
 
+      <!-- Destinations Dropdown -->
       <div class="nav-dropdown">
         <a href="#destinations">Destinations ▾</a>
         <div class="dropdown-menu">
@@ -233,7 +321,13 @@
           <a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a>
           <a href="destination-single.html?slug=juba-city-tour">Juba City Tour</a>
           <div class="dropdown-divider"></div>
-          <div class="dropdown-header">CULTURAL TOURS</div>
+          <div class="dropdown-header">FAUNA & SPECIES</div>
+          <a href="wildlife.html">Wildlife Overview</a>
+          <a href="wildlife-animals.html">Animals</a>
+          <a href="wildlife-birds.html">Birds</a>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-header">CULTURAL TOURS & HERITAGE</div>
+          <a href="#culture">Culture Overview</a>
           <a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka - Mundari</a>
           <a href="destination-single.html?slug=kapoeta-cultural-tour">Kapoeta - Toposa</a>
           <a href="destination-single.html?slug=bor-cultural-tour">Bor - Dinka</a>
@@ -247,17 +341,6 @@
       </div>
 
       <div class="nav-dropdown">
-        <a href="wildlife.html">Wildlife ▾</a>
-        <div class="dropdown-menu">
-          <div class="dropdown-header">FAUNA & SPECIES</div>
-          <a href="wildlife-animals.html">Animals</a>
-          <a href="wildlife-birds.html">Birds</a>
-        </div>
-      </div>
-
-      <a href="#culture">Culture</a>
-
-      <div class="nav-dropdown">
         <a href="gallery.html">Gallery & Media ▾</a>
         <div class="dropdown-menu">
           <div class="dropdown-header">RESOURCES & NEWS</div>
@@ -268,13 +351,20 @@
         </div>
       </div>
 
-      <a href="operators.html">Operators</a>
-      <a href="industry.html">Investment</a>
+      <!-- Investment Dropdown -->
+      <div class="nav-dropdown">
+        <a href="industry.html">Investment ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">BUSINESS & PARTNERS</div>
+          <a href="industry.html">Tourism Investment</a>
+          <a href="operators.html">Tour Operators</a>
+        </div>
+      </div>
+
       <a href="#where-to-stay">Where to Stay</a>
       <a href="contact.html">Contact Us</a>
     </nav>
     <div class="nav-cta">
-      <a href="permits.html" class="btn btn-primary">Get a Permit</a>
       <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -285,15 +375,14 @@
     <a href="about.html">Meet the Team</a>
     <a href="about.html">Our Vision & Mission</a>
     <a href="#destinations">Destinations</a>
-    <a href="wildlife-animals.html">Wildlife - Animals</a>
-    <a href="wildlife-birds.html">Wildlife - Birds</a>
+    <a href="wildlife.html">Wildlife</a>
     <a href="#culture">Culture</a>
     <a href="gallery.html">Gallery</a>
     <a href="press-release.html">Press Releases</a>
     <a href="tenders.html">Bids & Tenders</a>
     <a href="news.html">News Articles</a>
-    <a href="operators.html">Operators</a>
     <a href="industry.html">Investment</a>
+    <a href="operators.html">Tour Operators</a>
     <a href="#where-to-stay">Where to Stay</a>
     <a href="contact.html">Contact Us</a>
     <a href="permits.html">Get a Permit</a>
@@ -426,29 +515,6 @@
   </div>
 </section>
 
-<!-- Required JavaScript to Handle Tab Switching -->
-<script>
-  const tabs = document.querySelectorAll('.dest-tab'); 
-  const destPanels = document.querySelectorAll('.dest-panel');
-  
-  tabs.forEach(tab => { 
-    tab.addEventListener('click', () => { 
-      // Remove active states from all tabs and panels
-      tabs.forEach(t => t.classList.remove('active')); 
-      destPanels.forEach(p => p.classList.remove('active')); 
-      
-      // Add active state to clicked tab
-      tab.classList.add('active'); 
-      
-      // Target and display corresponding panel
-      const targetPanel = document.getElementById(tab.dataset.target);
-      if(targetPanel) {
-        targetPanel.classList.add('active'); 
-      }
-    }); 
-  });
-</script>
-
 <section class="section-pad bg-sand" id="wildlife">
   <div class="wrap">
     <div class="section-head reveal">
@@ -479,7 +545,6 @@
         <h2>Living Culture & Heritage</h2>
         <p>Discover 64 ethnic communities with rich traditions, ancient kingdoms, and pastoral life closely linked with nature.</p>
       </div>
-      
     </div>
     <div class="card-grid reveal">
       <a class="exp-card" href="destination-single.html?slug=terekeka-cultural-tour" style="background-image:url('images/Boma\ Plateau.jpeg')"><div class="tag">Mundari</div><h4>Terekeka Culture</h4></a>
@@ -498,7 +563,6 @@
         <h2>Where to Stay</h2>
         <p>Comfortable international hotels in Juba, eco-lodges along the Nile, and mobile safari camps in the wilderness.</p>
       </div>
-      
     </div>
     <div class="stay-card-grid reveal">
       <div class="stay-card">
@@ -528,7 +592,6 @@
         <h2>Service Standard Feedback Form</h2>
         <p>Help us improve tourism standard services, permits, and conservation experiences in South Sudan.</p>
       </div>
-      
     </div>
     <form class="feedback-form reveal" onsubmit="event.preventDefault(); alert('Thank you for your feedback!');">
       <div class="form-group">
@@ -557,7 +620,7 @@
   </div>
 </section>
 
-<!-- Partners Section with Logos -->
+<!-- Updated Strategic Partners Section with Clear, Unfiltered Logos -->
 <section class="section-pad bg-ink" id="partners">
   <div class="wrap">
     <div class="section-head reveal">
@@ -566,14 +629,23 @@
         <h2>Our Strategic Partners</h2>
         <p>Working together with international bodies and local organizations to protect biodiversity and promote heritage.</p>
       </div>
-      
     </div>
     <div class="partners-grid reveal">
-      <div class="partner-logo"><img src="images/African parks Logo PNG.png" alt="African Parks Logo"></div>
-      <div class="partner-logo"><img src="images/UN tourism Logo.png" alt="UN Tourism Logo"></div>
-      <div class="partner-logo"><img src="images/USAID Logo.png" alt="USAID Logo"></div>
-      <div class="partner-logo"><img src="images/WWF Logo.png" alt="WWF Logo"></div>
-      <div class="partner-logo"><img src="images/UNESCO Logo.png" alt="UNESCO Logo"></div>
+      <div class="partner-logo">
+        <img src="images/African parks Logo PNG.png" alt="African Parks Logo" loading="lazy">
+      </div>
+      <div class="partner-logo">
+        <img src="images/UN tourism Logo.png" alt="UN Tourism Logo" loading="lazy">
+      </div>
+      <div class="partner-logo">
+        <img src="images/USAID Logo.png" alt="USAID Logo" loading="lazy">
+      </div>
+      <div class="partner-logo">
+        <img src="images/WWF Logo.png" alt="WWF Logo" loading="lazy">
+      </div>
+      <div class="partner-logo">
+        <img src="images/UNESCO Logo.png" alt="UNESCO Logo" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
@@ -586,7 +658,6 @@
           <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
           <span class="brand-text">Ministry of Wildlife<span>Conservation and Tourism</span></span>
         </div>
-        
       </div>
       <div>
         <h5>Explore</h5>
@@ -637,6 +708,12 @@
 <a href="https://wa.me/+256765542041?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20tourism%20and%20permits%20in%20South%20Sudan." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
   <span class="whatsapp-tooltip">Chat with us</span>
   <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- Floating Permit Widget -->
+<a href="permits.html" class="permit-float" aria-label="Get a Permit">
+  <span class="permit-tooltip">Get a Permit</span>
+  <i class="fa-solid fa-passport"></i>
 </a>
 
 <script src="js/main.js"></script>
