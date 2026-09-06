@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,14 +32,15 @@
 
   /* Top Bar */
   .top-bar {
-    background: #0b2338;
+    background: rgba(11, 35, 56, 0.6);
+    backdrop-filter: blur(8px);
     color: var(--sand);
     font-size: 0.8rem;
     padding: 8px clamp(20px, 4vw, 48px);
     display: flex;
     justify-content: space-between;
     align-items:center;
-    border-bottom: 1px solid rgba(251,253,255,0.06);
+    border-bottom: 1px solid rgba(251,253,255,0.08);
     position: fixed;
     top: 0;
     left: 0;
@@ -56,23 +57,41 @@
     .top-bar { justify-content: flex-end; }
   }
 
+  /* Floating Widgets Container (Right Side) */
+  .floating-widgets {
+    position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column; gap: 14px; align-items: flex-end;
+  }
+
+  /* Floating Permit Button (Left Side) */
+  .permit-float {
+    position: fixed; bottom: 30px; left: 30px; z-index: 1000;
+    background-color: var(--gold); color: #FFF; padding: 12px 20px; border-radius: 30px; font-weight: 600; font-size: 0.88rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 8px; transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .permit-float:hover { background-color: var(--wetland); transform: translateY(-3px); }
+
   /* WhatsApp Floating Widget */
   .whatsapp-float {
-    position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: #FFF;
-    width: 60px; height: 60px; border-radius: 50px; text-align: center; font-size: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25); z-index: 1000; display: flex; align-items: center;
-    justify-content: center; transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: #25d366; color: #FFF; width: 50px; height: 50px; border-radius: 50px; text-align: center; font-size: 26px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease; position: relative;
   }
-  .whatsapp-float:hover { background-color: #20ba5a; transform: scale(1.1); }
+  .whatsapp-float:hover { background-color: #20ba5a; transform: scale(1.08); }
   .whatsapp-tooltip {
-    position: absolute; right: 70px; background: #fff; color: var(--ink); padding: 6px 12px;
+    position: absolute; right: 60px; background: #fff; color: var(--ink); padding: 6px 12px;
     border-radius: 4px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
   }
   .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; }
 
-  /* Navigation Header */
-  header{position:fixed; top:37px; left:0; right:0; z-index:100; background:rgba(16,46,74,0.92); backdrop-filter:blur(6px); border-bottom:1px solid rgba(251,253,255,0.08);}
+  /* Transparent Navigation Header */
+  header{
+    position:fixed; top:37px; left:0; right:0; z-index:100; 
+    background: transparent; 
+    backdrop-filter: none; 
+    border-bottom: none;
+    transition: background 0.3s ease;
+  }
   .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
   .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;} 
   .brand-logo-img{height:82px; width:auto; object-fit:contain; flex:none;}
@@ -85,7 +104,7 @@
   .dropdown-menu a{display:block; padding:9px 16px; font-size:13px; color:#222 !important} .dropdown-menu a:hover{background:var(--sand); color:var(--ink) !important}
   .dropdown-header{padding:8px 16px; font-size:10px; font-weight:800; letter-spacing:1px; color:#999; font-family:var(--mono)} .dropdown-divider{height:1px; background:#eee; margin:6px 0}
   .nav-cta{display:flex; align-items:center; gap:14px;} .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px;} .burger span{width:22px; height:2px; background:var(--white);} .mobile-menu{display:none; flex-direction:column; background:var(--ink); padding:10px 24px 26px;} .mobile-menu a{color:var(--sand); padding:12px 0; border-bottom:1px solid rgba(251,253,255,0.08); font-size:0.95rem;} .mobile-menu.open{display:flex;}
-  @media(max-width:1020px){ nav.links{display:none;} .nav-cta .btn{display:none;} .burger{display:flex;} }
+  @media(max-width:1020px){ nav.links{display:none;} .burger{display:flex;} }
 
   /* Inner Hero Banner */
   .inner-hero {
@@ -128,7 +147,7 @@
 <!-- Top Bar with Social Media Links -->
 <div class="top-bar">
   <div class="top-bar-contact">
-    <span><i class="fa-solid fa-envelope"></i> info@southsudantourism.gov.ss</span>
+    <span><i class="fa-solid fa-envelope"></i> info@southsudanttourism.gov.ss</span>
     <span><i class="fa-solid fa-phone"></i> +211 900 000 000</span>
   </div>
   <div class="top-bar-socials">
@@ -140,7 +159,7 @@
   </div>
 </div>
 
-<!-- Header -->
+<!-- Transparent Header -->
 <header>
   <div class="nav">
     <a href="index.html" class="brand">
@@ -160,10 +179,14 @@
         </div>
       </div>
 
+      <!-- Destinations Dropdown (Includes Wildlife & Culture) -->
       <div class="nav-dropdown">
         <a href="index.html#destinations">Destinations ▾</a>
         <div class="dropdown-menu">
           <div class="dropdown-header">WILDLIFE & NATURE</div>
+          <a href="wildlife.html">Wildlife Overview</a>
+          <a href="wildlife-animals.html">Animals</a>
+          <a href="wildlife-birds.html">Birds</a>
           <a href="destination-single.html?slug=great-nile-migration">Great Nile Migration</a>
           <a href="destination-single.html?slug=boma-badingilo">Boma–Badingilo</a>
           <a href="destination-single.html?slug=sudd-wetlands">Jonglei / Sudd</a>
@@ -172,7 +195,8 @@
           <a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a>
           <a href="destination-single.html?slug=juba-city-tour">Juba City Tour</a>
           <div class="dropdown-divider"></div>
-          <div class="dropdown-header">CULTURAL TOURS</div>
+          <div class="dropdown-header">CULTURAL TOURS & HERITAGE</div>
+          <a href="index.html#culture">Culture Overview</a>
           <a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka - Mundari</a>
           <a href="destination-single.html?slug=kapoeta-cultural-tour">Kapoeta - Toposa</a>
           <a href="destination-single.html?slug=bor-cultural-tour">Bor - Dinka</a>
@@ -186,17 +210,6 @@
       </div>
 
       <div class="nav-dropdown">
-        <a href="wildlife.html">Wildlife ▾</a>
-        <div class="dropdown-menu">
-          <div class="dropdown-header">FAUNA & SPECIES</div>
-          <a href="wildlife-animals.html">Animals</a>
-          <a href="wildlife-birds.html">Birds</a>
-        </div>
-      </div>
-
-      <a href="index.html#culture">Culture</a>
-
-      <div class="nav-dropdown">
         <a href="gallery.html">Gallery & Media ▾</a>
         <div class="dropdown-menu">
           <div class="dropdown-header">RESOURCES & NEWS</div>
@@ -207,13 +220,20 @@
         </div>
       </div>
 
-      <a href="operators.html">Operators</a>
-      <a href="industry.html">Investment</a>
+      <!-- Investment Dropdown (Includes Operators) -->
+      <div class="nav-dropdown">
+        <a href="industry.html">Investment ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">BUSINESS & SECTORS</div>
+          <a href="industry.html">Investment Opportunities</a>
+          <a href="operators.html">Tour Operators</a>
+        </div>
+      </div>
+
       <a href="index.html#where-to-stay">Where to Stay</a>
       <a href="contact.html">Contact Us</a>
     </nav>
     <div class="nav-cta">
-      <a href="permits.html" class="btn btn-primary">Get a Permit</a>
       <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -224,15 +244,14 @@
     <a href="about.html#team">Meet the Team</a>
     <a href="about.html#vision-mission">Our Vision & Mission</a>
     <a href="index.html#destinations">Destinations</a>
-    <a href="wildlife-animals.html">Wildlife - Animals</a>
-    <a href="wildlife-birds.html">Wildlife - Birds</a>
+    <a href="wildlife.html">Wildlife</a>
     <a href="index.html#culture">Culture</a>
     <a href="gallery.html">Gallery</a>
     <a href="press-release.html">Press Releases</a>
     <a href="tenders.html">Bids & Tenders</a>
     <a href="news.html">News Articles</a>
-    <a href="operators.html">Operators</a>
     <a href="industry.html">Investment</a>
+    <a href="operators.html">Tour Operators</a>
     <a href="contact.html">Contact Us</a>
     <a href="permits.html">Get a Permit</a>
   </div>
@@ -249,7 +268,7 @@
 </section>
 
 <!-- Wave Divider -->
-<div class="current-divider"><svg class="current" viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0 20 Q 60 5, 120 20 T 240 20 T 360 20 T 480 20 T 600 20 T 720 20 T 840 20 T 960 20 T 1080 20 T 1200 20"/></svg></div>
+<div class="current-divider"><svg class="current" viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0 20 Q 60 5, 120 20 T 240 20 T 360 20 T 480 20 T 600 20 T 720 20 T 840 20 T 1080 20 T 1200 20"/></svg></div>
 
 <!-- Section: Organization Overview -->
 <section class="section-pad bg-white" id="organization">
@@ -373,11 +392,19 @@
   </div>
 </section>
 
-<!-- Floating WhatsApp Widget -->
-<a href="https://wa.me/211900000000" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
-  <i class="fa-brands fa-whatsapp"></i>
-  <span class="whatsapp-tooltip">Chat with Ministry Support</span>
+<!-- Left Floating Permit Button -->
+<a href="permits.html" class="permit-float" aria-label="Get a Permit">
+  <i class="fa-solid fa-passport"></i>
+  <span>Get a Permit</span>
 </a>
+
+<!-- Right Floating WhatsApp Widget -->
+<div class="floating-widgets">
+  <a href="https://wa.me/211900000000" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Chat with Ministry Support</span>
+  </a>
+</div>
 
 <!-- Footer -->
 <footer>
