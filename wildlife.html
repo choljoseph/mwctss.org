@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,15 +22,15 @@
     .mono{font-family:var(--mono); letter-spacing:0.02em;}
     .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px);}
 
-    /* Shared Header Navigation */
-    header{position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(16,46,74,0.92); backdrop-filter:blur(6px); border-bottom:1px solid rgba(251,253,255,0.08);}
+    /* Transparent Header Navigation */
+    header{position:fixed; top:0; left:0; right:0; z-index:100; background:transparent; backdrop-filter:blur(6px); border-bottom:none;}
     .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
     .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;}
     .brand-logo-img{height:82px; width:auto; object-fit:contain; flex:none;}
     .brand-text{font-family:var(--display); font-size:1.35rem; font-weight:700; line-height:1.1; letter-spacing:-0.01em;}
     .brand-text span{display:block; font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; color:var(--gold-bright); text-transform:uppercase; margin-top:3px; font-weight:500;}
 
-    nav.links{display:flex; gap:24px; align-items:center; margin-right:28px;}
+    nav.links{display:flex; gap:24px; align-items:center;}
     nav.links a{color:var(--sand); font-size:0.86rem; font-weight:500; position:relative; padding:4px 0;}
     nav.links a:hover, nav.links a.active{color:var(--white);}
     nav.links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold-bright); transition:width .25s ease;}
@@ -44,16 +44,24 @@
     .dropdown-header{display:block; padding:8px 16px 4px 16px; font-size:10px; font-weight:800; letter-spacing:1px; color:var(--wetland) !important; font-family:var(--mono); text-transform:uppercase;}
     .dropdown-divider{height:1px; background:#eee; margin:6px 0}
 
-    .nav-cta{display:flex; align-items:center; gap:14px;}
-    .btn{display:inline-flex; align-items:center; justify-content:center; gap:0.5em; padding:0.85em 1.6em; border-radius:2px; font-size:0.92rem; font-weight:600; letter-spacing:0.02em; border:1px solid transparent; cursor:pointer; transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;}
-    .btn-primary{background:var(--gold); color:#fff;}
-    .btn-primary:hover{background:var(--wetland); transform:translateY(-2px);}
     .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px;}
     .burger span{width:22px; height:2px; background:var(--white);}
     .mobile-menu{display:none; flex-direction:column; background:var(--ink); padding:10px 24px 26px;}
     .mobile-menu a{color:var(--sand); padding:12px 0; border-bottom:1px solid rgba(251,253,255,0.08); font-size:0.95rem;}
     .mobile-menu.open{display:flex;}
-    @media(max-width:1020px){ nav.links{display:none;} .nav-cta .btn{display:none;} .burger{display:flex;} }
+    @media(max-width:1020px){ nav.links{display:none;} .burger{display:flex;} }
+
+    /* Floating Buttons */
+    .float-btn{position:fixed; bottom:24px; z-index:1000; display:flex; align-items:center; justify-content:center; gap:8px; border-radius:50px; text-decoration:none; box-shadow:0 8px 24px rgba(0,0,0,0.25); transition:transform 0.25s ease, box-shadow 0.25s ease;}
+    .float-btn:hover{transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,0.35);}
+    
+    /* Bottom-Left Floating Permit Button */
+    .float-permit{left:24px; background:var(--gold); color:#fff; padding:12px 20px; font-size:0.88rem; font-weight:600;}
+    .float-permit svg{width:18px; height:18px; fill:currentColor;}
+    
+    /* Bottom-Right Floating WhatsApp Button */
+    .float-whatsapp{right:24px; background:#25D366; color:#fff; width:52px; height:52px; border-radius:50%;}
+    .float-whatsapp svg{width:28px; height:28px; fill:currentColor;}
 
     /* Page Content */
     .page-header{padding:180px 0 70px; background:var(--ink); color:#fff;}
@@ -92,9 +100,14 @@
     </a>
     <nav class="links">
       <a href="about.html">About</a>
+
+      <!-- Destinations Dropdown (Includes Wildlife & Culture) -->
       <div class="nav-dropdown">
         <a href="destinations.html">Destinations ▾</a>
         <div class="dropdown-menu">
+          <a href="wildlife.html" class="dropdown-header">WILDLIFE ➔</a>
+          <a href="culture.html" class="dropdown-header">CULTURE ➔</a>
+          <div class="dropdown-divider"></div>
           <a href="destinations.html#wildlife-nature" class="dropdown-header">WILDLIFE & NATURE ➔</a>
           <a href="destination-single.html?slug=great-nile-migration">Great Nile Migration</a>
           <a href="destination-single.html?slug=boma-badingilo">Boma–Badingilo</a>
@@ -116,33 +129,50 @@
           <a href="destination-single.html?slug=anyuak-kingdom">Anyuak Kingdom</a>
         </div>
       </div>
-      <a href="wildlife.html" class="active">Wildlife</a>
-      <a href="culture.html">Culture</a>
+
       <a href="gallery.html">Gallery & Media</a>
-      <a href="operators.html">Operators</a>
-      <a href="industry.html">Investment</a>
+
+      <!-- Investment Dropdown (Includes Operators) -->
+      <div class="nav-dropdown">
+        <a href="industry.html">Investment ▾</a>
+        <div class="dropdown-menu">
+          <a href="operators.html">Operators</a>
+          <a href="industry.html">Tourism Investment</a>
+        </div>
+      </div>
+
       <a href="where-to-stay.html">Where to Stay</a>
       <a href="contact.html">Contact Us</a>
     </nav>
-    <div class="nav-cta">
-      <a href="permits.html" class="btn btn-primary">Get a Permit</a>
-      <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
-    </div>
+
+    <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
   </div>
+
   <div class="mobile-menu" id="mobileMenu">
     <a href="about.html">About</a>
     <a href="destinations.html">Destinations</a>
     <a href="wildlife.html">Wildlife</a>
     <a href="culture.html">Culture</a>
     <a href="gallery.html">Gallery & Media</a>
-    <a href="operators.html">Operators</a>
     <a href="industry.html">Investment</a>
+    <a href="operators.html">Operators</a>
     <a href="where-to-stay.html">Where to Stay</a>
     <a href="plan-your-visit.html">Plan Your Visit</a>
     <a href="contact.html">Contact Us</a>
     <a href="permits.html">Get a Permit</a>
   </div>
 </header>
+
+<!-- Bottom-Left Floating Get Permit Button -->
+<a href="permits.html" class="float-btn float-permit" aria-label="Get a Permit">
+  <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+  <span>Get Permit</span>
+</a>
+
+<!-- Bottom-Right Floating WhatsApp Icon -->
+<a href="https://wa.me/211900000000" target="_blank" rel="noopener noreferrer" class="float-btn float-whatsapp" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.508 0-9.988 4.479-9.988 9.987 0 1.954.562 3.774 1.536 5.312L2 22l4.81-1.531c1.488.814 3.195 1.258 4.972 1.258 5.508 0 9.988-4.479 9.988-9.987 0-5.508-4.48-9.987-9.988-9.987zm5.82 14.28c-.244.688-1.218 1.309-1.996 1.385-.53.053-1.22.096-3.54-.863-2.968-1.228-4.887-4.249-5.034-4.448-.148-.198-1.202-1.6-1.202-3.05 0-1.45.76-2.164 1.033-2.457.273-.292.593-.365.792-.365.198 0 .396.002.569.01.183.008.43-.069.673.515.244.584.832 2.032.905 2.18.073.149.122.323.024.516-.098.193-.148.313-.292.485-.144.173-.304.387-.435.52-.148.149-.302.311-.13.606.173.295.769 1.269 1.652 2.056 1.135 1.011 2.092 1.325 2.387 1.472.295.148.468.123.641-.074.173-.198.744-.866.942-1.163.198-.297.396-.248.669-.148.273.099 1.733.817 2.03 1.015.297.198.495.297.569.42.074.124.074.718-.17 1.406z"/></svg>
+</a>
 
 <section class="page-header">
   <div class="wrap">
