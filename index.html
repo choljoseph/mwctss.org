@@ -271,6 +271,93 @@
   .foot-bottom{display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; text-align:left; padding-top:24px; font-size:0.78rem; gap:6px;} 
   @media(max-width:900px){ .foot-grid{grid-template-columns:1fr 1fr;} }
   .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .reveal.in{opacity:1; transform:translateY(0);}
+  /* ==========================================
+   RESPONSIVE MEDIA QUERIES & BREAKPOINTS
+   ========================================== */
+
+/* Ultra-Wide Screens (1440px and above) */
+@media (min-width: 1440px) {
+  .wrap { max-width: 1320px; }
+  .hero-inner { padding: 240px 0 110px; }
+  .hero h1 { font-size: 5.5rem; }
+}
+
+/* Laptops & Tablets Landscape (Max-width: 1024px) */
+@media (max-width: 1024px) {
+  /* Navigation */
+  header { top: 35px; }
+  .brand-logo-img { height: 60px; }
+  .brand-text { font-size: 1.1rem; }
+  
+  /* Hero */
+  .hero-inner { padding: 180px 0 70px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .hero-stats div { border-left: none; padding-left: 0; }
+  
+  /* Grids */
+  .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .stay-card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  
+  /* Footer */
+  .foot-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+}
+
+/* Tablets Portrait & Large Mobile (Max-width: 768px) */
+@media (max-width: 768px) {
+  /* Top Bar & Header */
+  .top-bar-contact { display: none; }
+  .top-bar { justify-content: flex-end; padding: 6px 20px; }
+  header { top: 31px; }
+  .brand-logo-img { height: 50px; }
+  .brand-text { font-size: 0.95rem; }
+  .brand-text span { font-size: 0.65rem; }
+  
+  /* Mobile Navigation Dropdowns */
+  .mobile-menu {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  /* Hero Section */
+  .hero-inner { padding: 150px 0 50px; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  
+  /* Content Sections */
+  .section-pad { padding: 60px 0; }
+  .section-head { margin-bottom: 28px; flex-direction: column; align-items: flex-start; }
+  
+  /* Destination Tabs */
+  .dest-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; width: 100%; }
+  .dest-tab { flex: 0 0 auto; white-space: nowrap; }
+  .dest-panel { grid-template-columns: 1fr; gap: 24px; }
+  
+  /* Grids */
+  .grid-2col { grid-template-columns: 1fr; gap: 24px; }
+  .stay-card-grid { grid-template-columns: 1fr; }
+  .culture-subgrid { grid-template-columns: 1fr; }
+  
+  /* Partners & Footer */
+  .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+  
+  /* Floating Buttons */
+  .whatsapp-float, .permit-float { width: 50px; height: 50px; font-size: 22px; bottom: 20px; }
+  .whatsapp-float { right: 20px; }
+  .permit-float { left: 20px; }
+  .whatsapp-tooltip, .permit-tooltip { display: none; }
+}
+
+/* Small Mobile Screens (Max-width: 480px) */
+@media (max-width: 480px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr; }
+  .feedback-form { padding: 20px 16px; }
+  .brand-text { display: none; } /* Show only logo on ultra-narrow screens */
+}
 </style>
 </head>
 <body id="home">
@@ -719,12 +806,24 @@
 
 <script src="js/main.js"></script>
 <script>
+  // Mobile Navigation Menu Toggle
   const burger = document.getElementById('burger'); 
   const mobileMenu = document.getElementById('mobileMenu');
-  if(burger && mobileMenu) {
-    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Auto-close menu when clicking links on mobile
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
   }
   
+  // Destination Tab Switching
   const destTabs = document.querySelectorAll('.dest-tab'); 
   const panels = document.querySelectorAll('.dest-panel');
   destTabs.forEach(tab => { 
@@ -737,6 +836,7 @@
     }); 
   });
   
+  // Intersection Observer for Scroll Animations
   const revealEls = document.querySelectorAll('.reveal'); 
   const io = new IntersectionObserver((entries) => { 
     entries.forEach(entry => { 
@@ -745,7 +845,7 @@
         io.unobserve(entry.target); 
       } 
     }); 
-  }, { threshold: 0.15 }); 
+  }, { threshold: 0.1 }); 
   revealEls.forEach(el => io.observe(el));
 </script>
 </body>
