@@ -136,7 +136,93 @@
     .foot-grid li{padding:6px 0; font-size:0.85rem;}
     .foot-grid li a:hover{color:var(--white);}
     .foot-bottom{display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; text-align:left; padding-top:24px; font-size:0.78rem; gap:6px;}
-    @media(max-width:900px){ .grid-2, .grid-3{grid-template-columns:1fr;} .foot-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:900px){ .grid-2, .grid-3{grid-template-columns:1fr;} .foot-grid{grid-template-columns:1fr 1fr;} }/* ==========================================
+   RESPONSIVE MEDIA QUERIES & BREAKPOINTS
+   ========================================== */
+
+/* Ultra-Wide Screens (1440px and above) */
+@media (min-width: 1440px) {
+  .wrap { max-width: 1320px; }
+  .hero-inner { padding: 240px 0 110px; }
+  .hero h1 { font-size: 5.5rem; }
+}
+
+/* Laptops & Tablets Landscape (Max-width: 1024px) */
+@media (max-width: 1024px) {
+  /* Navigation */
+  header { top: 35px; }
+  .brand-logo-img { height: 60px; }
+  .brand-text { font-size: 1.1rem; }
+  
+  /* Hero */
+  .hero-inner { padding: 180px 0 70px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .hero-stats div { border-left: none; padding-left: 0; }
+  
+  /* Grids */
+  .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .stay-card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  
+  /* Footer */
+  .foot-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+}
+
+/* Tablets Portrait & Large Mobile (Max-width: 768px) */
+@media (max-width: 768px) {
+  /* Top Bar & Header */
+  .top-bar-contact { display: none; }
+  .top-bar { justify-content: flex-end; padding: 6px 20px; }
+  header { top: 31px; }
+  .brand-logo-img { height: 50px; }
+  .brand-text { font-size: 0.95rem; }
+  .brand-text span { font-size: 0.65rem; }
+  
+  /* Mobile Navigation Dropdowns */
+  .mobile-menu {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  /* Hero Section */
+  .hero-inner { padding: 150px 0 50px; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  
+  /* Content Sections */
+  .section-pad { padding: 60px 0; }
+  .section-head { margin-bottom: 28px; flex-direction: column; align-items: flex-start; }
+  
+  /* Destination Tabs */
+  .dest-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; width: 100%; }
+  .dest-tab { flex: 0 0 auto; white-space: nowrap; }
+  .dest-panel { grid-template-columns: 1fr; gap: 24px; }
+  
+  /* Grids */
+  .grid-2col { grid-template-columns: 1fr; gap: 24px; }
+  .stay-card-grid { grid-template-columns: 1fr; }
+  .culture-subgrid { grid-template-columns: 1fr; }
+  
+  /* Partners & Footer */
+  .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+  
+  /* Floating Buttons */
+  .whatsapp-float, .permit-float { width: 50px; height: 50px; font-size: 22px; bottom: 20px; }
+  .whatsapp-float { right: 20px; }
+  .permit-float { left: 20px; }
+  .whatsapp-tooltip, .permit-tooltip { display: none; }
+}
+
+/* Small Mobile Screens (Max-width: 480px) */
+@media (max-width: 480px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr; }
+  .feedback-form { padding: 20px 16px; }
+  .brand-text { display: none; } /* Show only logo on ultra-narrow screens */
+}
   </style>
 </head>
 <body id="top">
@@ -144,8 +230,8 @@
 <header>
   <div class="nav">
     <a href="index.html" class="brand">
-      <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
-      <span class="brand-text">Ministry Of Wildlife <span>Conservation and Tourism</span></span>
+      <img src="images/logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+      <span class="brand-text"> Directorate <span> Of Tourism</span></span>
     </a>
     <nav class="links">
       <a href="about.html">About</a>
@@ -223,7 +309,7 @@
     <div class="grid-2">
       <!-- Terekeka - Mundari -->
       <div class="tour-card">
-        <div class="tour-card-img" style="background-image:url('https://images.unsplash.com/photo-1547471080-40712d7ad63a');">
+        <div class="tour-card-img" style="background-image:url(images/Terekeka.jpg);">
           <span class="tour-card-badge">Central Equatoria</span>
         </div>
         <div class="tour-card-body">
@@ -238,7 +324,7 @@
 
       <!-- Kapoeta - Toposa -->
       <div class="tour-card">
-        <div class="tour-card-img" style="background-image:url('https://images.unsplash.com/photo-1517483000871-1dbf64a6e1c6');">
+        <div class="tour-card-img" style="background-image:url(images/toposa-villages.jpg);">
           <span class="tour-card-badge">Eastern Equatoria</span>
         </div>
         <div class="tour-card-body">
@@ -253,7 +339,7 @@
 
       <!-- Bor - Dinka -->
       <div class="tour-card">
-        <div class="tour-card-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4');">
+        <div class="tour-card-img" style="background-image:url(images/Dinka\ Bor.webp);">
           <span class="tour-card-badge">Jonglei State</span>
         </div>
         <div class="tour-card-body">
@@ -268,7 +354,7 @@
 
       <!-- Torit - Lotuko -->
       <div class="tour-card">
-        <div class="tour-card-img" style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b');">
+        <div class="tour-card-img" style="background-image:url('images/Lotuko.jpg');">
           <span class="tour-card-badge">Imatong Region</span>
         </div>
         <div class="tour-card-body">
@@ -321,10 +407,10 @@
     <div class="foot-grid">
       <div>
         <div class="brand" style="color:#fff; margin-bottom:16px;">
-          <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
-          <span class="brand-text">Ministry of Wildlife<span>Conservation and Tourism</span></span>
+          <img src="images/logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+          <span class="brand-text"> Directorate <span> Of Tourism</span></span>
         </div>
-        <p style="font-size:0.85rem; max-width:260px;">Preserving South Sudan's Nature and Cultural Heritage</p>
+       
       </div>
       <div>
         <h5>Explore</h5>
@@ -373,11 +459,47 @@
 
 <script src="js/main.js"></script>
 <script>
-  const burger = document.getElementById('burger');
+  // Mobile Navigation Menu Toggle
+  const burger = document.getElementById('burger'); 
   const mobileMenu = document.getElementById('mobileMenu');
+  
   if (burger && mobileMenu) {
-    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    burger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Auto-close menu when clicking links on mobile
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
   }
+  
+  // Destination Tab Switching
+  const destTabs = document.querySelectorAll('.dest-tab'); 
+  const panels = document.querySelectorAll('.dest-panel');
+  destTabs.forEach(tab => { 
+    tab.addEventListener('click', () => { 
+      destTabs.forEach(t => t.classList.remove('active')); 
+      panels.forEach(p => p.classList.remove('active')); 
+      tab.classList.add('active'); 
+      const targetPanel = document.getElementById(tab.dataset.target);
+      if(targetPanel) targetPanel.classList.add('active'); 
+    }); 
+  });
+  
+  // Intersection Observer for Scroll Animations
+  const revealEls = document.querySelectorAll('.reveal'); 
+  const io = new IntersectionObserver((entries) => { 
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) { 
+        entry.target.classList.add('in'); 
+        io.unobserve(entry.target); 
+      } 
+    }); 
+  }, { threshold: 0.1 }); 
+  revealEls.forEach(el => io.observe(el));
 </script>
 </body>
 </html>
