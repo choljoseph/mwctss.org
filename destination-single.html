@@ -7,170 +7,457 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    :root{
-      --ink:#102E4A; --ink-soft:#1A2E3A; --gold:#4AA8E0; --gold-bright:#87CFF5;
-      --wetland:#2E7DA6; --clay:#3A8FB7; --sand:#EDF6FC; --sand-deep:#D6EBF8;
-      --white:#FBFDFF; --line:rgba(16,46,74,0.12); --shadow: 0 12px 40px rgba(16,46,74,0.12);
-      --display: 'Fraunces', serif; --body: 'Work Sans', sans-serif; --mono: 'IBM Plex Mono', monospace;
+    :root {
+      --ink: #102E4A;
+      --ink-soft: #1A2E3A;
+      --gold: #4AA8E0;
+      --gold-bright: #87CFF5;
+      --wetland: #2E7DA6;
+      --clay: #3A8FB7;
+      --sand: #EDF6FC;
+      --sand-deep: #D6EBF8;
+      --white: #FBFDFF;
+      --line: rgba(16, 46, 74, 0.12);
+      --shadow: 0 12px 40px rgba(16, 46, 74, 0.12);
+      --display: 'Fraunces', serif;
+      --body: 'Work Sans', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
     }
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0; font-family:var(--body); color:var(--ink-soft); background:var(--white); -webkit-font-smoothing:antialiased;}
-    h1,h2,h3,h4,h5{font-family:var(--display); margin:0; color:var(--ink); font-weight:600; letter-spacing:-0.01em;}
-    p{line-height:1.65; margin:0 0 1em;} a{color:inherit; text-decoration:none;} ul{margin:0; padding:0; list-style:none;} img{max-width:100%; display:block;}
-    .mono{font-family:var(--mono); letter-spacing:0.02em;}
-    .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px);}
 
-    /* Transparent Header */
-    header{position:fixed; top:0; left:0; right:0; z-index:100; background:transparent; backdrop-filter:none; border-bottom:none;}
-    .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
-    .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;}
-    .brand-logo-img{height:82px; width:auto; object-fit:contain; flex:none;}
-    .brand-text{font-family:var(--display); font-size:1.35rem; font-weight:700; line-height:1.1; letter-spacing:-0.01em;}
-    .brand-text span{display:block; font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; color:var(--gold-bright); text-transform:uppercase; margin-top:3px; font-weight:500;}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--body);
+      color: var(--ink-soft);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
 
-    nav.links{display:flex; gap:24px; align-items:center; margin-right:28px;}
-    nav.links a{color:var(--sand); font-size:0.86rem; font-weight:500; position:relative; padding:4px 0;}
-    nav.links a:hover{color:var(--white);}
-    nav.links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold-bright); transition:width .25s ease;}
-    nav.links a:hover::after{width:100%;}
-    
-    .nav-dropdown{position:relative;}
-    .nav-dropdown:hover .dropdown-menu{display:block;}
-    .dropdown-menu{display:none; position:absolute; top:100%; left:0; background:#fff; min-width:220px; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.2); padding:10px 0; z-index:99;}
-    .dropdown-menu a{display:block; padding:9px 16px; font-size:13px; color:#222 !important;}
-    .dropdown-menu a:hover{background:var(--sand); color:var(--ink) !important;}
-    
-    .nav-cta{display:flex; align-items:center; gap:14px;}
-    .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px;}
-    .burger span{width:22px; height:2px; background:var(--white); display:block;}
-    .mobile-menu{display:none; flex-direction:column; background:var(--ink); padding:10px 24px 26px;}
-    .mobile-menu a{color:var(--sand); padding:12px 0; border-bottom:1px solid rgba(251,253,255,0.08); font-size:0.95rem;}
-    .mobile-menu.open{display:flex;}
-    @media(max-width:1020px){ nav.links{display:none;} .burger{display:flex;} }
-
-    /* Floating Buttons */
-    .floating-permit-btn {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      z-index: 999;
-      background: var(--gold);
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 50px;
+    h1, h2, h3, h4, h5 {
+      font-family: var(--display);
+      margin: 0;
+      color: var(--ink);
       font-weight: 600;
-      font-size: 0.9rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      letter-spacing: -0.01em;
+    }
+
+    p { line-height: 1.65; margin: 0 0 1em; }
+    a { color: inherit; text-decoration: none; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+    .mono { font-family: var(--mono); letter-spacing: 0.02em; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wetland);
       display: flex;
       align-items: center;
-      gap: 8px;
-      transition: transform 0.25s ease, background 0.25s ease;
+      gap: 0.6em;
+      margin-bottom: 0.9em;
     }
-    .floating-permit-btn:hover {
-      background: var(--wetland);
-      transform: translateY(-3px);
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+      display: inline-block;
     }
 
-    .floating-whatsapp-btn {
+    /* Top Bar */
+    .top-bar {
+      background: #0b2338;
+      color: var(--sand);
+      font-size: 0.8rem;
+      padding: 8px clamp(20px, 4vw, 48px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(251, 253, 255, 0.06);
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 999;
-      background: #25D366;
-      color: #fff;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 101;
+    }
+    .top-bar-contact { display: flex; gap: 20px; }
+    .top-bar-contact span { display: flex; align-items: center; gap: 6px; }
+    .top-bar-socials { display: flex; gap: 14px; align-items: center; }
+    .top-bar-socials a { color: var(--sand); transition: color 0.2s ease; font-size: 0.9rem; }
+    .top-bar-socials a:hover { color: var(--gold-bright); }
+    @media (max-width: 768px) {
+      .top-bar-contact { display: none; }
+      .top-bar { justify-content: flex-end; }
+    }
+
+    /* Header & Navigation Structure matching index.html / destinations.html */
+    header {
+      position: fixed;
+      top: 37px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(16, 46, 74, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(251, 253, 255, 0.12);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px clamp(20px, 4vw, 48px);
+      margin: 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+      margin-right: auto;
+    }
+    .brand-logo-img { height: 60px; width: auto; object-fit: contain; flex: none; }
+    .brand-text {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .brand-text span {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--gold-bright);
+      text-transform: uppercase;
+      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    nav.links { display: flex; gap: 24px; align-items: center; margin-right: 28px; }
+    nav.links a {
+      color: var(--sand);
+      font-size: 0.86rem;
+      font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+    }
+    nav.links a:hover { color: var(--white); }
+    nav.links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold-bright);
+      transition: width 0.25s ease;
+    }
+    nav.links a:hover::after { width: 100%; }
+
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      min-width: 260px;
+      border-radius: 8px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      padding: 10px 0;
+      z-index: 99;
+    }
+    .dropdown-menu a { display: block; padding: 9px 16px; font-size: 13px; color: #222 !important; }
+    .dropdown-menu a:hover { background: var(--sand); color: var(--ink) !important; }
+    .dropdown-header {
+      display: block;
+      padding: 8px 16px 4px 16px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--wetland) !important;
+      font-family: var(--mono);
+      text-transform: uppercase;
+    }
+    .dropdown-divider { height: 1px; background: #eee; margin: 6px 0; }
+
+    .nav-cta { display: flex; align-items: center; gap: 14px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.75em 1.4em;
+      border-radius: 2px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+    }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-primary:hover { background: var(--wetland); transform: translateY(-2px); }
+
+    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .burger span { width: 22px; height: 2px; background: var(--white); display: block; }
+    .mobile-menu { display: none; flex-direction: column; background: var(--ink); padding: 10px 24px 26px; }
+    .mobile-menu a { color: var(--sand); padding: 12px 0; border-bottom: 1px solid rgba(251, 253, 255, 0.08); font-size: 0.95rem; }
+    .mobile-menu.open { display: flex; }
+    @media (max-width: 1020px) { nav.links { display: none; } .burger { display: flex; } }
+
+    /* Floating Action Buttons */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25d366;
+      color: #FFF;
+      width: 60px;
+      height: 60px;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-      transition: transform 0.25s ease, background 0.25s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
-    .floating-whatsapp-btn:hover {
-      background: #1DA851;
-      transform: translateY(-3px);
+    .whatsapp-float:hover { background-color: #20ba5a; transform: scale(1.1); }
+    .whatsapp-tooltip {
+      position: absolute;
+      right: 70px;
+      background: #fff;
+      color: var(--ink);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
-    .floating-whatsapp-btn svg {
-      width: 30px;
-      height: 30px;
-      fill: #fff;
+    .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; }
+
+    .permit-float {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background-color: var(--gold);
+      color: #FFF;
+      width: 60px;
+      height: 60px;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
+    .permit-float:hover { background-color: var(--wetland); transform: scale(1.1); }
+    .permit-tooltip {
+      position: absolute;
+      left: 70px;
+      background: #fff;
+      color: var(--ink);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .permit-float:hover .permit-tooltip { opacity: 1; }
 
     /* Directory View Styles */
-    .page-header{padding:180px 0 60px; background:var(--ink); color:var(--white);}
-    .section-pad{padding:80px 0;}
-    .dest-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; margin-top:32px;}
-    .dest-card{border:1px solid var(--line); border-radius:4px; overflow:hidden; background:var(--white); transition:transform 0.3s ease, box-shadow 0.3s ease;}
-    .dest-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
-    .dest-card-img{height:220px; background-size:cover; background-position:center; position:relative;}
-    .dest-card-badge{position:absolute; top:12px; right:12px; background:rgba(16,46,74,0.85); color:var(--white); font-family:var(--mono); font-size:0.7rem; padding:4px 10px; border-radius:2px;}
-    .dest-card-body{padding:24px;}
-    .dest-card-body h3{font-size:1.3rem; margin-bottom:8px;}
-    .dest-card-body p{font-size:0.92rem; color:var(--ink-soft); margin-bottom:16px;}
-    .tag-list{display:flex; gap:8px; flex-wrap:wrap;}
-    .tag{font-family:var(--mono); font-size:0.7rem; background:var(--sand); color:var(--wetland); padding:4px 8px; border-radius:2px;}
+    .page-header { padding: 180px 0 60px; background: var(--ink); color: var(--white); }
+    .section-pad { padding: 80px 0; }
+    .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 32px; }
+    .dest-card { border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--white); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .dest-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .dest-card-img { height: 220px; background-size: cover; background-position: center; position: relative; }
+    .dest-card-badge { position: absolute; top: 12px; right: 12px; background: rgba(16, 46, 74, 0.85); color: var(--white); font-family: var(--mono); font-size: 0.7rem; padding: 4px 10px; border-radius: 2px; }
+    .dest-card-body { padding: 24px; }
+    .dest-card-body h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .dest-card-body p { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 16px; }
+    .tag-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { font-family: var(--mono); font-size: 0.7rem; background: var(--sand); color: var(--wetland); padding: 4px 8px; border-radius: 2px; }
 
     /* Single View Styles */
-    .hero-single{height:500px; background-size:cover; background-position:center; position:relative; display:flex; align-items:flex-end; color:#fff; padding:60px 0; margin-top:106px;}
-    .hero-single::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg, var(--ink) 0%, rgba(16,46,74,0.4) 60%, transparent 100%);}
-    .hero-content{position:relative; z-index:2;}
+    .hero-single { height: 500px; background-size: cover; background-position: center; position: relative; display: flex; align-items: flex-end; color: #fff; padding: 60px 0; margin-top: 106px; }
+    .hero-single::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--ink) 0%, rgba(16, 46, 74, 0.4) 60%, transparent 100%); }
+    .hero-content { position: relative; z-index: 2; }
     
-    .meta-bar{display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; border:1px solid var(--line); padding:24px; margin:40px 0; background:var(--sand); border-radius:4px;}
-    .meta-item{text-align:left;}
-    .meta-item label{display:block; font-family:var(--mono); font-size:0.75rem; color:var(--wetland); text-transform:uppercase; margin-bottom:4px;}
-    .meta-item span{font-weight:600; font-size:1.05rem; color:var(--ink);}
+    .meta-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; border: 1px solid var(--line); padding: 24px; margin: 40px 0; background: var(--sand); border-radius: 4px; }
+    .meta-item { text-align: left; }
+    .meta-item label { display: block; font-family: var(--mono); font-size: 0.75rem; color: var(--wetland); text-transform: uppercase; margin-bottom: 4px; }
+    .meta-item span { font-weight: 600; font-size: 1.05rem; color: var(--ink); }
 
-    .content-grid{display:grid; grid-template-columns:2fr 1fr; gap:48px; margin-bottom:60px;}
-    .sidebar-box{border:1px solid var(--line); padding:24px; border-radius:4px; background:#fff; position:sticky; top:120px;}
+    .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; margin-bottom: 60px; }
+    .sidebar-box { border: 1px solid var(--line); padding: 24px; border-radius: 4px; background: #fff; position: sticky; top: 120px; }
     
-    .related-sec{padding:60px 0 100px; border-top:1px solid var(--line); background:var(--white);}
-    .rel-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-top:32px;}
-    .rel-card{border:1px solid var(--line); border-radius:4px; overflow:hidden; background:#fff; transition:transform 0.3s ease, box-shadow 0.3s ease;}
-    .rel-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
-    .rel-card-body{padding:20px;}
-    .rel-card-body h4{font-size:1.15rem; margin-bottom:6px;}
-    .rel-card-body p{font-size:0.88rem; color:var(--ink-soft); margin-bottom:12px;}
+    .related-sec { padding: 60px 0 100px; border-top: 1px solid var(--line); background: var(--white); }
+    .rel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+    .rel-card { border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: #fff; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .rel-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .rel-card-body { padding: 20px; }
+    .rel-card-body h4 { font-size: 1.15rem; margin-bottom: 6px; }
+    .rel-card-body p { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px; }
 
-    footer{background:var(--ink); color:rgba(251,253,255,0.75); padding:70px 0 30px; text-align:left;}
-    .foot-grid{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(251,253,255,0.12);}
-    .foot-grid h5{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:18px;}
-    .foot-grid li{padding:6px 0; font-size:0.85rem;}
-    .foot-grid li a:hover{color:var(--white);}
-    .foot-bottom{display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; text-align:left; padding-top:24px; font-size:0.78rem; gap:6px;}
+    footer { background: var(--ink); color: rgba(251, 253, 255, 0.75); padding: 70px 0 30px; text-align: left; }
+    .foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px; padding-bottom: 50px; border-bottom: 1px solid rgba(251, 253, 255, 0.12); }
+    .foot-grid h5 { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 18px; }
+    .foot-grid li { padding: 6px 0; font-size: 0.85rem; }
+    .foot-grid li a:hover { color: var(--white); }
+    .foot-bottom { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; text-align: left; padding-top: 24px; font-size: 0.78rem; gap: 6px; }
     
-    @media(max-width:900px){ .dest-grid{grid-template-columns:1fr 1fr;} .content-grid{grid-template-columns:1fr;} .meta-bar{grid-template-columns:1fr 1fr;} .rel-grid{grid-template-columns:1fr 1fr;} .foot-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:600px){ .dest-grid{grid-template-columns:1fr;} .meta-bar{grid-template-columns:1fr;} .rel-grid{grid-template-columns:1fr;} }
+    @media (max-width: 900px) { .dest-grid { grid-template-columns: 1fr 1fr; } .content-grid { grid-template-columns: 1fr; } .meta-bar { grid-template-columns: 1fr 1fr; } .rel-grid { grid-template-columns: 1fr 1fr; } .foot-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .dest-grid { grid-template-columns: 1fr; } .meta-bar { grid-template-columns: 1fr; } .rel-grid { grid-template-columns: 1fr; } } 
+
+    /* Responsive Media Queries */
+    @media (min-width: 1440px) {
+      .wrap { max-width: 1320px; }
+      .hero-inner { padding: 240px 0 110px; }
+      .hero h1 { font-size: 5.5rem; }
+    }
+    @media (max-width: 1024px) {
+      header { top: 35px; }
+      .brand-logo-img { height: 60px; }
+      .brand-text { font-size: 1.1rem; }
+      .hero-inner { padding: 180px 0 70px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .hero-stats div { border-left: none; padding-left: 0; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .stay-card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .foot-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    }
+    @media (max-width: 768px) {
+      .top-bar-contact { display: none; }
+      .top-bar { justify-content: flex-end; padding: 6px 20px; }
+      header { top: 31px; }
+      .brand-logo-img { height: 50px; }
+      .brand-text { font-size: 0.95rem; }
+      .brand-text span { font-size: 0.65rem; }
+      .mobile-menu { max-height: 80vh; overflow-y: auto; }
+      .hero-inner { padding: 150px 0 50px; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-sub { font-size: 0.95rem; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .section-pad { padding: 60px 0; }
+      .section-head { margin-bottom: 28px; flex-direction: column; align-items: flex-start; }
+      .dest-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; width: 100%; }
+      .dest-tab { flex: 0 0 auto; white-space: nowrap; }
+      .dest-panel { grid-template-columns: 1fr; gap: 24px; }
+      .grid-2col { grid-template-columns: 1fr; gap: 24px; }
+      .stay-card-grid { grid-template-columns: 1fr; }
+      .culture-subgrid { grid-template-columns: 1fr; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+      .whatsapp-float, .permit-float { width: 50px; height: 50px; font-size: 22px; bottom: 20px; }
+      .whatsapp-float { right: 20px; }
+      .permit-float { left: 20px; }
+      .whatsapp-tooltip, .permit-tooltip { display: none; }
+    }
+    @media (max-width: 480px) {
+      .card-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .partners-grid { grid-template-columns: 1fr; }
+      .feedback-form { padding: 20px 16px; }
+      .brand-text { display: none; }
+    }
   </style>
 </head>
 <body id="top">
 
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-bar-contact">
+    <span><i class="fa-solid fa-envelope"></i> info@southsudantourism.gov.ss</span>
+    <span><i class="fa-solid fa-phone"></i> +211 900 000 000</span>
+  </div>
+  <div class="top-bar-socials">
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+  </div>
+</div>
+
+<!-- Header (Matching destinations.html Structure) -->
 <header>
   <div class="nav">
-    <a href="destinations.html" class="brand">
-      <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
-      <span class="brand-text">Ministry Of Wildlife <span>Conservation and Tourism</span></span>
+    <a href="index.html" class="brand">
+      <img src="images/logo-PNG.png" alt="Ministry Logo" class="brand-logo-img">
+      <span class="brand-text"> Directorate <span> Of Tourism </span></span>
     </a>
     <nav class="links">
+      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       
-      <!-- Destinations Dropdown (With Wildlife & Culture inside) -->
+      <!-- Destinations Dropdown -->
       <div class="nav-dropdown">
         <a href="destinations.html">Destinations ▾</a>
         <div class="dropdown-menu">
+          <span class="dropdown-header">CATEGORIES ➔</span>
           <a href="index.html#wildlife">Wildlife</a>
           <a href="index.html#culture">Culture</a>
+          
+          <div class="dropdown-divider"></div>
+          
+          <span class="dropdown-header">WILDLIFE & NATURE ➔</span>
+          <a href="destination-single.html?slug=great-nile-migration">Great Nile Migration</a>
+          <a href="destination-single.html?slug=boma-badingilo">Boma–Badingilo</a>
+          <a href="destination-single.html?slug=sudd-wetlands">Jonglei / Sudd</a>
+          <a href="destination-single.html?slug=nimule-national-park">Nimule National Park</a>
+          <a href="destination-single.html?slug=imatong-mountains">Imatong Mountains</a>
+          <a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a>
+          <a href="destination-single.html?slug=juba-city-tour">Juba City Tour</a>
+          
+          <div class="dropdown-divider"></div>
+          
+          <span class="dropdown-header">CULTURAL TOURS ➔</span>
+          <a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka - Mundari</a>
+          <a href="destination-single.html?slug=kapoeta-cultural-tour">Kapoeta - Toposa</a>
+          <a href="destination-single.html?slug=bor-cultural-tour">Bor - Dinka</a>
+          <a href="destination-single.html?slug=torit-cultural-tour">Torit - Lotuko</a>
+          
+          <div class="dropdown-divider"></div>
+          
+          <span class="dropdown-header">KINGDOMS ➔</span>
+          <a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a>
+          <a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a>
+          <a href="destination-single.html?slug=anyuak-kingdom">Anyuak Kingdom</a>
         </div>
       </div>
-
+      
       <a href="gallery.html">Gallery & Media</a>
-
-      <!-- Investment Dropdown (With Operators inside) -->
+      
+      <!-- Investment Dropdown -->
       <div class="nav-dropdown">
         <a href="industry.html">Investment ▾</a>
         <div class="dropdown-menu">
+          <a href="industry.html">Investment Overview</a>
           <a href="operators.html">Operators</a>
         </div>
       </div>
@@ -179,6 +466,7 @@
       <a href="contact.html">Contact Us</a>
     </nav>
     <div class="nav-cta">
+      <a href="permits.html" class="btn btn-primary">Get a Permit</a>
       <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -191,28 +479,17 @@
     <a href="industry.html">Investment</a>
     <a href="operators.html">Operators</a>
     <a href="index.html#where-to-stay">Where to Stay</a>
+    <a href="index.html#plan">Plan Your Visit</a>
     <a href="contact.html">Contact Us</a>
     <a href="permits.html">Get a Permit</a>
   </div>
 </header>
 
-<!-- Floating Get Permit Button (Bottom Left) -->
-<a href="permits.html" class="floating-permit-btn">
-  📋 <span>Get a Permit</span>
-</a>
-
-<!-- Floating WhatsApp Button (Bottom Right) -->
-<a href="https://wa.me/211900000000" target="_blank" class="floating-whatsapp-btn" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 32 32">
-    <path d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-1.6A13 13 0 1 0 16 2zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-4 1 1-3.9-.3-.4A10.6 10.6 0 1 1 16 25.6zm5.8-8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 8.9 8.9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.4-.5a1.8 1.8 0 0 0 .3-.5.6.6 0 0 0 0-.6c0-.1-.7-1.7-.9-2.3s-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4A3.7 3.7 0 0 0 10 12a6.4 6.4 0 0 0 1.4 3.4 14.6 14.6 0 0 0 5.6 4.9c.8.3 1.4.5 1.9.7a4.6 4.6 0 0 0 2.1.1 3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.4-.2-.7-.3z"/>
-  </svg>
-</a>
-
 <!-- VIEW 1: FULL DIRECTORY GRID -->
 <div id="directory-view">
   <section class="page-header">
     <div class="wrap">
-      <div style="font-family:var(--mono); font-size:0.8rem; color:var(--gold-bright); margin-bottom:12px;">DIRECTORY</div>
+      <div class="eyebrow">DIRECTORY</div>
       <h1>All Destinations & Expeditions</h1>
       <p style="max-width:560px; color:var(--sand); margin-top:12px;">Explore national parks, sacred highlands, living kingdoms, and ancient cultural heritage across South Sudan.</p>
     </div>
@@ -237,7 +514,7 @@
         </div>
 
         <div class="dest-card">
-          <div class="dest-card-img" style="background-image:url('images/Boma Plateau.jpeg');">
+          <div class="dest-card-img" style="background-image:url('images/Tiang\ \ in\ Boma\ and\ Badingilo\ National\ Parks\,\ South\ Sudan\ ©\ Marcus\ Westberg\ \(15\).jpg');">
             <span class="dest-card-badge">Savannah</span>
           </div>
           <div class="dest-card-body">
@@ -249,7 +526,7 @@
         </div>
 
         <div class="dest-card">
-          <div class="dest-card-img" style="background-image:url('images/Sudd wetlands.jpg');">
+          <div class="dest-card-img" style="background-image:url('images/Sudd\ wetlands.jpg');">
             <span class="dest-card-badge">Wetland</span>
           </div>
           <div class="dest-card-body">
@@ -354,7 +631,7 @@
         </div>
 
         <div class="dest-card">
-          <div class="dest-card-img" style="background-image:url('images/Imatong.jpg');">
+          <div class="dest-card-img" style="background-image:url('images/Lotuko.jpg');">
             <span class="dest-card-badge">Highland Culture</span>
           </div>
           <div class="dest-card-body">
@@ -471,23 +748,23 @@
   </section>
 </div>
 
+<!-- Footer -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <div class="brand" style="color:#fff; margin-bottom:16px;">
-          <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+          <img src="images/logo-PNG.png" alt="Ministry Logo" class="brand-logo-img">
           <span class="brand-text">Ministry of Wildlife<span>Conservation and Tourism</span></span>
         </div>
-        <p style="font-size:0.85rem; max-width:260px;">Preserving South Sudan's Nature and Cultural Heritage</p>
       </div>
       <div>
         <h5>Explore</h5>
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="destinations.html">Destinations</a></li>
-          <li><a href="destinations.html?slug=imatong-mountains">Imatong Mountains</a></li>
-          <li><a href="destinations.html?slug=jebel-kujur">Jebel Kujur</a></li>
+          <li><a href="destination-single.html?slug=imatong-mountains">Imatong Mountains</a></li>
+          <li><a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a></li>
           <li><a href="gallery.html">Gallery & Media</a></li>
         </ul>
       </div>
@@ -495,9 +772,9 @@
         <h5>Cultural</h5>
         <ul>
           <li><a href="index.html#culture">Living Culture</a></li>
-          <li><a href="destinations.html?slug=terekeka-cultural-tour">Terekeka</a></li>
-          <li><a href="destinations.html?slug=zande-kingdom">Zande Kingdom</a></li>
-          <li><a href="destinations.html?slug=chollo-kingdom">Chollo Kingdom</a></li>
+          <li><a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka</a></li>
+          <li><a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a></li>
+          <li><a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a></li>
         </ul>
       </div>
       <div>
@@ -526,89 +803,60 @@
   </div>
 </footer>
 
+<!-- Floating Action Buttons -->
+<a href="https://wa.me/+256765542041?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20tourism%20and%20permits%20in%20South%20Sudan." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <span class="whatsapp-tooltip">Chat with us</span>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a href="permits.html" class="permit-float" aria-label="Get a Permit">
+  <span class="permit-tooltip">Get a Permit</span>
+  <i class="fa-solid fa-passport"></i>
+</a>
+
 <script src="js/main.js"></script>
 <script>
-(function(){
-  // Mobile navigation toggle
-  const burger = document.getElementById('burger');
+  // Mobile Navigation Menu Toggle
+  const burger = document.getElementById('burger'); 
   const mobileMenu = document.getElementById('mobileMenu');
+  
   if (burger && mobileMenu) {
-    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    burger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Auto-close menu when clicking links on mobile
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
   }
-
-  function getSlug(){
-    var m = window.location.search.match(/[?&]slug=([^&]+)/);
-    return m ? decodeURIComponent(m[1]) : null;
-  }
-
-  const destinations = {
-    'great-nile-migration': { title:'Great Nile Migration', category:'WILDLIFE & NATURE', location:'Boma-Badingilo Landscape', season:'Nov – March', permit:'Wildlife Special Clearance', hub:'Juba International Airport', img:'images/Antelopes migration.jpeg', desc:'Witness over 6 million white-eared kob, tiang, and gazelles moving across the vast savannah of the Boma-Badingilo ecosystem in the world\'s largest land mammal migration.', highlights:['Tracking 6 million migrating antelopes across savannah floodplains','Pristine wildlife wilderness expeditions','Sightings of apex predators including lions, cheetahs, and wild dogs'], circuit:'Serves as South Sudan\'s premier wildlife safari. Connects directly via air charters to Juba and overland corridors to Boma and Badingilo parks.', related:['boma-badingilo','sudd-wetlands','terekeka-cultural-tour'] },
-    'boma-badingilo': { title:'Boma–Badingilo Complex', category:'WILDLIFE & NATURE', location:'Jonglei & Eastern Equatoria', season:'Dec – May', permit:'Park Entry Clearance', hub:'Juba Air Charter', img:'images/Boma Plateau.jpeg', desc:'Spanning over 31,000 square kilometers, this vast protected wilderness protects critical breeding grounds for migratory herds, giraffes, and African elephants.', highlights:['Game drives across seasonal floodplains and woodland savannahs','Wildlife tracking with local game wardens','Birdwatching in remote acacia groves and wetlands'], circuit:'Forms the geographic core of the Great Nile Migration corridor and connects eastward to Kapoeta.', related:['great-nile-migration','kapoeta-cultural-tour','sudd-wetlands'] },
-    'sudd-wetlands': { title:'Jonglei / Sudd Wetlands', category:'WILDLIFE & NATURE', location:'Jonglei & Unity States', season:'Nov – March', permit:'River Transit Permit', hub:'Bor / Malakal', img:'images/Sudd wetlands.jpg', desc:'One of the largest freshwater wetlands in the world. The Sudd is a vast labyrinth of papyrus marshes, channels, and lakes supporting over 400 avian species.', highlights:['Shoebill stork boat safaris and waterfowl watching','Navigating historical Nile river trade routes','Interactions with indigenous Nile fishing hamlets'], circuit:'Accessible by boat from Bor or charter flight. Pairs seamlessly with Bor Dinka cultural tours and northern river expeditions.', related:['bor-cultural-tour','chollo-kingdom','terekeka-cultural-tour'] },
-    'nimule-national-park': { title:'Nimule National Park', category:'WILDLIFE & NATURE', location:'Eastern Equatoria (Uganda Border)', season:'Year-round', permit:'Park Entry Permit', hub:'Nimule / Juba Overland', img:'images/Elephants in Nimule.jpg', desc:'Situated along the White Nile near the Ugandan border, Nimule features riverboat safaris to view elephant herds, hippos, crocodiles, and waterbucks.', highlights:['Nile River boat safaris to view elephants on island sanctuaries','Trekking to Fula Rapids along the White Nile','Convenient overland access from Juba'], circuit:'Functions as an accessible weekend safari route from Juba or an entry destination when traveling overland from East Africa.', related:['juba-city-tour','imatong-mountains','torit-cultural-tour'] },
-    'imatong-mountains': { title:'Imatong Mountains', category:'WILDLIFE & NATURE', location:'Eastern Equatoria', season:'Nov – March', permit:'Required (TDP)', hub:'Torit / Juba', img:'images/Imatong mountain.jpg', desc:'Home to Mount Kinyeti, South Sudan’s highest peak at 3,187 meters. Covered in lush cloud forests and sub-alpine vegetation, the region offers unparalleled trekking, endemic flora, and rich cultural interactions with local Lotuko mountain communities.', highlights:['Summit expedition up Mount Kinyeti (3,187m)','Guided cloud-forest hikes with local trackers','High-altitude birdwatching for endemic Albertine species'], circuit:'Pairs directly with Torit Cultural Tours to explore Lotuko stone villages, or as a highland extension from Nimule.', related:['torit-cultural-tour','nimule-national-park','kapoeta-cultural-tour'] },
-    'jebel-kujur': { title:'Jebel Kujur', category:'WILDLIFE & NATURE', location:'Juba City Boundary', season:'Year-round', permit:'Local Guide Fee', hub:'Juba Downtown', img:'images/Jebel Kujur.jpg', desc:'The iconic mountain framing Juba’s western skyline. Revered for its spiritual heritage, Jebel Kujur offers rewarding hikes and sunset vistas over the capital and the Nile.', highlights:['Morning hikes to mountain vantage points','Panoramic views across Juba City and the White Nile','Insights into traditional spiritual customs'], circuit:'An essential half-day excursion included in the Juba City Tour prior to embarking on long-haul regional expeditions.', related:['juba-city-tour','terekeka-cultural-tour','nimule-national-park'] },
-    'juba-city-tour': { title:'Juba City Tour', category:'WILDLIFE & NATURE', location:'Central Equatoria', season:'Year-round', permit:'City Sightseeing Clearance', hub:'Juba International Airport', img:'images/Juba.jpg', desc:'Explore South Sudan’s capital city, combining bustling local markets, Nile riverfront dining, historical monuments, and cultural landmarks.', highlights:['Visits to Konyo Konyo Market and artisanal craft centers','Sunset cruises along the White Nile','Jebel Kujur guided nature walks'], circuit:'The primary entry point for all international travelers before connecting to regional wildlife parks and cultural camps.', related:['jebel-kujur','terekeka-cultural-tour','nimule-national-park'] },
-    'terekeka-cultural-tour': { title:'Terekeka (Mundari Culture)', category:'CULTURAL TOURS', location:'Central Equatoria', season:'Nov – April', permit:'Standard Tourist Permit', hub:'Juba (4-hour drive)', img:'images/Terekeka.jpg', desc:'Located along the White Nile, Terekeka is the cultural center of the Mundari pastoralists, famous for traditional cattle camps, ash coating, and Ankole-Watusi herds.', highlights:['Overnight stays in Mundari cattle camps','Golden hour photography with Ankole-Watusi cattle','Traditional wrestling matches and cultural performances'], circuit:'Frequently paired with the Juba City Tour as an entry route, continuing overland to Bor or along the Nile into the Sudd.', related:['juba-city-tour','sudd-wetlands','bor-cultural-tour'] },
-    'kapoeta-cultural-tour': { title:'Kapoeta (Toposa Heritage)', category:'CULTURAL TOURS', location:'Eastern Equatoria', season:'Nov – April', permit:'Regional Cultural Permit', hub:'Kapoeta Air Strip / Torit', img:'images/Imatong mountain.jpg', desc:'Step into the world of the Toposa people in Eastern Equatoria, known for their traditional architecture, pastoral customs, and body scarification artistry.', highlights:['Exploration of traditional Toposa architectural hamlets','Cultural encounters with elders and pastoralists','Craft and beadwork artisan markets'], circuit:'Forms an eastern cultural circuit connecting Torit, the Imatong Mountains, and the Boma wilderness.', related:['torit-cultural-tour','imatong-mountains','boma-badingilo'] },
-    'bor-cultural-tour': { title:'Bor (Dinka Culture)', category:'CULTURAL TOURS', location:'Jonglei State', season:'Nov – March', permit:'State Tourist Permit', hub:'Bor Airport / River Port', img:'images/Sudd wetlands.jpg', desc:'Experience Dinka pastoral culture, cattle camp traditions, and community life in Jonglei State along the banks of the White Nile.', highlights:['Dinka cattle camp visits and pastoral demonstrations','Traditional dance, poetry, and oral history sessions','Excursions to the edge of the Sudd wetlands'], circuit:'Acts as the launch point for boat safaris into the Sudd wetlands and connects southward back to Terekeka and Juba.', related:['sudd-wetlands','terekeka-cultural-tour','chollo-kingdom'] },
-    'torit-cultural-tour': { title:'Torit (Lotuko Heritage)', category:'CULTURAL TOURS', location:'Eastern Equatoria', season:'Nov – March', permit:'Regional Tourist Permit', hub:'Torit Overland', img:'images/Imatong.jpg', desc:'Explore the stone-walled villages and highland culture of the Lotuko people, nestled at the base of the Imatong Mountain range.', highlights:['Guided walks through stone-walled Lotuko villages','Highland agricultural terracing and traditional customs','Gateway to Mount Kinyeti summit expeditions'], circuit:'Combines directly with trekking expeditions in the Imatong Mountains and overland journeys to Kapoeta.', related:['imatong-mountains','kapoeta-cultural-tour','nimule-national-park'] },
-    'zande-kingdom': { title:'Azande Kingdom', category:'KINGDOMS', location:'Western Equatoria (Yambio)', season:'Dry Season (Nov – April)', permit:'Royal Courtesy Clearance', hub:'Yambio Air Strip', img:'images/Azande.jpg', desc:'Discover the royal heritage, court traditions, traditional governance, and forest culture of the Azande Kingdom in Western Equatoria.', highlights:['Visits to royal court sites and traditional palaces in Yambio','Cultural performances and Azande music traditions','Exploration of surrounding tropical forest ecosystems'], circuit:'Serves as the Western Equatoria flagship destination for cultural, historical, and eco-tourism travelers.', related:['juba-city-tour','terekeka-cultural-tour','chollo-kingdom'] },
-    'chollo-kingdom': { title:'Chollo (Shilluk) Kingdom', category:'KINGDOMS', location:'Upper Nile (Fashoda / Malakal)', season:'Nov – March', permit:'State & Royal Clearance', hub:'Malakal Airport', img:'images/Chollo King.jpg', desc:'Visit Fashoda, the royal capital of the Chollo (Shilluk) Kingdom along the Nile, steeped in sacred Reth traditions and river lore.', highlights:['Historical insight into the sacred Reth monarchy of Fashoda','Nile riverfront cultural settlements','Traditional ceremonies and historic craftsmanship'], circuit:'Connects via Nile riverboat transport from Malakal and links southward with the Sudd wetlands and Bor.', related:['sudd-wetlands','bor-cultural-tour','anyuak-kingdom'] },
-    'anyuak-kingdom': { title:'Anyuak Kingdom', category:'KINGDOMS', location:'Pibor / Eastern Borderlands', season:'Nov – March', permit:'Special Clearance', hub:'Pibor / Juba Charter', img:'images/Anyuak King.jpg', desc:'Explore the royal traditions and village structures of the Anyuak people, centered around village nobility and river trade history.', highlights:['Guided tours of traditional Anyuak village courts','River fishing and forest foraging traditions','Oral histories of eastern monarchical lineages'], circuit:'Forms part of the eastern wild frontier circuit connecting Pibor, Boma National Park, and the Anyuak borderlands.', related:['boma-badingilo','great-nile-migration','chollo-kingdom'] }
-  };
-
-  function render(){
-    var slug = getSlug();
-    var dirView = document.getElementById('directory-view');
-    var singleView = document.getElementById('single-view');
-
-    if(!slug){
-      dirView.style.display = 'block';
-      singleView.style.display = 'none';
-      document.title = 'All Destinations — Ministry of Wildlife Conservation and Tourism';
-      return;
-    }
-
-    var item = destinations[slug];
-    if(!item){
-      dirView.style.display = 'none';
-      singleView.style.display = 'block';
-      document.getElementById('destTitle').textContent = 'Destination not found';
-      document.getElementById('destDesc').textContent = 'The requested destination slug "' + slug + '" does not exist.';
-      return;
-    }
-
-    dirView.style.display = 'none';
-    singleView.style.display = 'block';
-
-    document.getElementById('destTitle').textContent = item.title;
-    document.getElementById('destCategory').textContent = item.category;
-    document.getElementById('destLocation').textContent = item.location;
-    document.getElementById('destSeason').textContent = item.season;
-    document.getElementById('destPermit').textContent = item.permit;
-    document.getElementById('destHub').textContent = item.hub;
-    document.getElementById('destDesc').textContent = item.desc;
-    document.getElementById('destCircuit').textContent = item.circuit;
-    document.getElementById('destHero').style.backgroundImage = "url('" + item.img + "')";
-    document.getElementById('destHighlights').innerHTML = item.highlights.map(function(h){ return '<li>'+h+'</li>'; }).join('');
-    
-    document.getElementById('relatedContainer').innerHTML = item.related.map(function(s){
-      var r = destinations[s];
-      if(!r) return '';
-      return "<div class='rel-card'><div style='height:140px; background:url("+r.img+") center/cover;'></div><div class='rel-card-body'><div style='font-family:var(--mono); font-size:0.68rem; color:var(--wetland);'>"+r.category+"</div><h4>"+r.title+"</h4><p>"+r.desc.substring(0,90)+"...</p><a href='destinations.html?slug="+s+"' style='font-size:0.85rem; font-weight:600; color:var(--wetland);'>Explore Connection →</a></div></div>";
-    }).join('');
-
-    document.title = item.title + ' — Ministry of Wildlife Conservation and Tourism';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', render);
-  } else {
-    render();
-  }
-})();
+  
+  // Destination Tab Switching
+  const destTabs = document.querySelectorAll('.dest-tab'); 
+  const panels = document.querySelectorAll('.dest-panel');
+  destTabs.forEach(tab => { 
+    tab.addEventListener('click', () => { 
+      destTabs.forEach(t => t.classList.remove('active')); 
+      panels.forEach(p => p.classList.remove('active')); 
+      tab.classList.add('active'); 
+      const targetPanel = document.getElementById(tab.dataset.target);
+      if(targetPanel) targetPanel.classList.add('active'); 
+    }); 
+  });
+  
+  // Intersection Observer for Scroll Animations
+  const revealEls = document.querySelectorAll('.reveal'); 
+  const io = new IntersectionObserver((entries) => { 
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) { 
+        entry.target.classList.add('in'); 
+        io.unobserve(entry.target); 
+      } 
+    }); 
+  }, { threshold: 0.1 }); 
+  revealEls.forEach(el => io.observe(el));
 </script>
 </body>
 </html>
