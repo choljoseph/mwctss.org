@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Include FontAwesome for Social and WhatsApp Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <style>
     :root{
@@ -16,21 +18,62 @@
       --display: 'Fraunces', serif; --body: 'Work Sans', sans-serif; --mono: 'IBM Plex Mono', monospace;
     }
     *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0; font-family:var(--body); color:var(--ink-soft); background:var(--white); -webkit-font-smoothing:antialiased;}
+    body{margin:0; font-family:var(--body); color:var(--ink-soft); background:var(--white); -webkit-font-smoothing:antialiased; overflow-x:hidden;}
     h1,h2,h3,h4,h5{font-family:var(--display); margin:0; color:var(--ink); font-weight:600; letter-spacing:-0.01em;}
     p{line-height:1.65; margin:0 0 1em;} a{color:inherit; text-decoration:none;} ul{margin:0; padding:0; list-style:none;} img{max-width:100%; display:block;}
     .mono{font-family:var(--mono); letter-spacing:0.02em;}
     .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px);}
 
-    /* Transparent Header Navigation */
-    header{position:fixed; top:0; left:0; right:0; z-index:100; background:transparent; backdrop-filter:none; border-bottom:1px solid rgba(251,253,255,0.15);}
+    /* Top Bar */
+    .top-bar {
+      background: #0b2338;
+      color: var(--sand);
+      font-size: 0.8rem;
+      padding: 8px clamp(20px, 4vw, 48px);
+      display: flex;
+      justify-content: space-between;
+      align-items:center;
+      border-bottom: 1px solid rgba(251,253,255,0.06);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 101;
+    }
+    .top-bar-contact { display: flex; gap: 20px; }
+    .top-bar-contact span { display: flex; align-items: center; gap: 6px; }
+    .top-bar-socials { display: flex; gap: 14px; align-items: center; }
+    .top-bar-socials a { color: var(--sand); transition: color 0.2s ease; font-size: 0.9rem; }
+    .top-bar-socials a:hover { color: var(--gold-bright); }
+    @media(max-width: 768px) {
+      .top-bar-contact { display: none; }
+      .top-bar { justify-content: flex-end; }
+    }
+
+    /* Floating Widgets */
+    .whatsapp-float {
+      position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: #FFF; width: 60px; height: 60px; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .whatsapp-float:hover { background-color: #20ba5a; transform: scale(1.1); }
+    .whatsapp-tooltip { position: absolute; right: 70px; background: #fff; color: var(--ink); padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.1); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; }
+
+    .permit-float {
+      position: fixed; bottom: 30px; left: 30px; background-color: var(--gold); color: #FFF; width: 60px; height: 60px; border-radius: 50px; text-align: center; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .permit-float:hover { background-color: var(--wetland); transform: scale(1.1); }
+    .permit-tooltip { position: absolute; left: 70px; background: #fff; color: var(--ink); padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.1); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .permit-float:hover .permit-tooltip { opacity: 1; }
+
+    /* Header & Navigation */
+    header{position:fixed; top:37px; left:0; right:0; z-index:100; background:transparent; backdrop-filter:blur(4px); border-bottom:1px solid rgba(251,253,255,0.12);}
     .nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px clamp(20px,4vw,48px); margin:0;}
     .brand{display:flex; align-items:center; gap:12px; color:var(--white); margin-right:auto;}
     .brand-logo-img{height:82px; width:auto; object-fit:contain; flex:none;}
     .brand-text{font-family:var(--display); font-size:1.35rem; font-weight:700; line-height:1.1; letter-spacing:-0.01em;}
     .brand-text span{display:block; font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; color:var(--gold-bright); text-transform:uppercase; margin-top:3px; font-weight:500;}
 
-    nav.links{display:flex; gap:24px; align-items:center;}
+    nav.links{display:flex; gap:24px; align-items:center; margin-right:28px;}
     nav.links a{color:var(--sand); font-size:0.86rem; font-weight:500; position:relative; padding:4px 0;}
     nav.links a:hover, nav.links a.active{color:var(--white);}
     nav.links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold-bright); transition:width .25s ease;}
@@ -38,72 +81,121 @@
     
     .nav-dropdown{position:relative;}
     .nav-dropdown:hover .dropdown-menu{display:block;}
-    .dropdown-menu{display:none; position:absolute; top:100%; left:0; background:#fff; min-width:240px; border-radius:8px; box-shadow:0 20px 50px rgba(0,0,0,0.2); padding:10px 0; z-index:99;}
+    .dropdown-menu{display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%); background:#fff; min-width:260px; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.2); padding:10px 0; z-index:99;}
     .dropdown-menu a{display:block; padding:9px 16px; font-size:13px; color:#222 !important;}
     .dropdown-menu a:hover, .dropdown-menu a.active{background:var(--sand); color:var(--ink) !important;}
     .dropdown-menu a::after{display:none;}
-    .dropdown-header{display:block; padding:8px 16px 4px 16px; font-size:10px; font-weight:800; letter-spacing:1px; color:var(--wetland) !important; font-family:var(--mono); text-transform:uppercase;}
+    .dropdown-header{padding:8px 16px; font-size:10px; font-weight:800; letter-spacing:1px; color:#999; font-family:var(--mono);}
     .dropdown-divider{height:1px; background:#eee; margin:6px 0;}
 
+    .nav-cta{display:flex; align-items:center; gap:14px;}
     .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px;}
     .burger span{width:22px; height:2px; background:var(--white);}
     .mobile-menu{display:none; flex-direction:column; background:var(--ink); padding:10px 24px 26px;}
     .mobile-menu a{color:var(--sand); padding:12px 0; border-bottom:1px solid rgba(251,253,255,0.08); font-size:0.95rem;}
     .mobile-menu.open{display:flex;}
-    @media(max-width:1020px){ nav.links{display:none;} .burger{display:flex;} }
-
-    /* Floating Icons */
-    .floating-permit-btn{
-      position:fixed; bottom:24px; left:24px; z-index:999;
-      background:var(--gold); color:#fff; width:52px; height:52px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow:0 10px 25px rgba(0,0,0,0.3); transition:transform .25s ease, background .25s ease;
-    }
-    .floating-permit-btn:hover{background:var(--wetland); transform:scale(1.08);}
-
-    .floating-whatsapp-btn{
-      position:fixed; bottom:24px; right:24px; z-index:999;
-      background:#25D366; color:#fff; width:52px; height:52px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow:0 10px 25px rgba(0,0,0,0.3); transition:transform .25s ease, background .25s ease;
-    }
-    .floating-whatsapp-btn:hover{background:#1EBE5D; transform:scale(1.08);}
+    @media(max-width:1020px){ nav.links{display:none;} .nav-cta .btn{display:none;} .burger{display:flex;} }
 
     /* Page Content */
     .page-header{padding:180px 0 60px; background:var(--ink); color:#fff;}
     .op-table-wrap{overflow-x:auto;}
-    .op-table{width:100%; border-collapse:collapse; margin:50px 0 100px; background:#fff; border:1px solid var(--line);}
+    .op-table{width:100%; border-collapse:collapse; margin:30px 0 60px; background:#fff; border:1px solid var(--line);}
     .op-table th, .op-table td{padding:18px 24px; text-align:left; border-bottom:1px solid var(--line);}
     .op-table th{font-family:var(--mono); font-size:0.75rem; text-transform:uppercase; color:var(--ink); background:var(--sand); font-weight:600;}
     .status-badge{font-family:var(--mono); font-size:0.7rem; color:#2e7d32; background:#e8f5e9; padding:4px 10px; border-radius:2px; font-weight:500;}
+    .op-contact-info{font-size:0.85rem; line-height:1.4; color:var(--ink-soft);}
+    .op-contact-info a{color:var(--clay); text-decoration:underline;}
 
-    /* Shared Footer Layout - Aligned Left */
+    /* Tourist Gear Section */
+    .section-heading{margin:60px 0 20px;}
+    .product-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:24px; margin-bottom:100px;}
+    .product-card{background:#fff; border:1px solid var(--line); border-radius:6px; overflow:hidden; transition:transform 0.25s ease, box-shadow 0.25s ease;}
+    .product-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+    .product-card img{width:100%; height:220px; object-fit:cover; background-color:var(--sand);}
+    .product-info{padding:20px;}
+    .product-category{font-family:var(--mono); font-size:0.7rem; color:var(--wetland); text-transform:uppercase; margin-bottom:6px; font-weight:600;}
+    .product-title{font-size:1.1rem; margin-bottom:8px;}
+    .product-desc{font-size:0.88rem; color:var(--ink-soft); margin-bottom:0;}
+
+    /* Shared Footer Layout */
     footer{background:var(--ink); color:rgba(251,253,255,0.75); padding:70px 0 30px; text-align:left;}
     .foot-grid{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(251,253,255,0.12);}
     .foot-grid h5{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-bright); margin-bottom:18px;}
     .foot-grid li{padding:6px 0; font-size:0.85rem;}
     .foot-grid li a:hover, .foot-grid li a.active{color:var(--white);}
     .foot-bottom{display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; text-align:left; padding-top:24px; font-size:0.78rem; gap:6px;}
-    @media(max-width:900px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+
+    /* Responsive Media Queries */
+    @media (min-width: 1440px) {
+      .wrap { max-width: 1320px; }
+    }
+    @media (max-width: 1024px) {
+      header { top: 35px; }
+      .brand-logo-img { height: 60px; }
+      .brand-text { font-size: 1.1rem; }
+      .foot-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    }
+    @media (max-width: 768px) {
+      .top-bar-contact { display: none; }
+      .top-bar { justify-content: flex-end; padding: 6px 20px; }
+      header { top: 31px; }
+      .brand-logo-img { height: 50px; }
+      .brand-text { font-size: 0.95rem; }
+      .brand-text span { font-size: 0.65rem; }
+      .mobile-menu { max-height: 80vh; overflow-y: auto; }
+      .foot-grid { grid-template-columns: 1fr; gap: 24px; }
+      .whatsapp-float, .permit-float { width: 50px; height: 50px; font-size: 22px; bottom: 20px; }
+      .whatsapp-float { right: 20px; }
+      .permit-float { left: 20px; }
+      .whatsapp-tooltip, .permit-tooltip { display: none; }
+    }
+    @media (max-width: 480px) {
+      .brand-text { display: none; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body id="top">
 
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-bar-contact">
+    <span><i class="fa-solid fa-envelope"></i> info@southsudantourism.gov.ss</span>
+    <span><i class="fa-solid fa-phone"></i> +211 900 000 000</span>
+  </div>
+  <div class="top-bar-socials">
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+  </div>
+</div>
+
+<!-- Header / Nav -->
 <header>
   <div class="nav">
     <a href="index.html" class="brand">
-      <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
-      <span class="brand-text">Ministry Of Wildlife <span>Conservation and Tourism</span></span>
+      <img src="images/logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+      <span class="brand-text"> Directorate <span> Of Tourism</span></span>
     </a>
     <nav class="links">
-      <a href="about.html">About</a>
+      <a href="index.html">Home</a>
+      
       <div class="nav-dropdown">
-        <a href="destinations.html">Destinations ▾</a>
+        <a href="about.html">About ▾</a>
         <div class="dropdown-menu">
-          <a href="wildlife.html">Wildlife</a>
-          <a href="culture.html">Culture</a>
-          <div class="dropdown-divider"></div>
-          <a href="destinations.html#wildlife-nature" class="dropdown-header">WILDLIFE & NATURE ➔</a>
+          <div class="dropdown-header">ORGANIZATION</div>
+          <a href="about.html">About Us</a>
+          <a href="about.html#team">Meet the Team</a>
+          <a href="about.html#mission">Vision, Mission & Values</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <a href="index.html#destinations">Destinations ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">WILDLIFE & NATURE</div>
           <a href="destination-single.html?slug=great-nile-migration">Great Nile Migration</a>
           <a href="destination-single.html?slug=boma-badingilo">Boma–Badingilo</a>
           <a href="destination-single.html?slug=sudd-wetlands">Jonglei / Sudd</a>
@@ -112,65 +204,56 @@
           <a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a>
           <a href="destination-single.html?slug=juba-city-tour">Juba City Tour</a>
           <div class="dropdown-divider"></div>
-          <a href="destinations.html#cultural-tours" class="dropdown-header">CULTURAL TOURS ➔</a>
-          <a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka - Mundari</a>
-          <a href="destination-single.html?slug=kapoeta-cultural-tour">Kapoeta - Toposa</a>
-          <a href="destination-single.html?slug=bor-cultural-tour">Bor - Dinka</a>
-          <a href="destination-single.html?slug=torit-cultural-tour">Torit - Lotuko</a>
-          <div class="dropdown-divider"></div>
-          <a href="destinations.html#kingdoms" class="dropdown-header">KINGDOMS ➔</a>
-          <a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a>
-          <a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a>
-          <a href="destination-single.html?slug=anyuak-kingdom">Anyuak Kingdom</a>
+          <div class="dropdown-header">FAUNA & SPECIES</div>
+          <a href="wildlife.html">Wildlife Overview</a>
+          <a href="wildlife-animals.html">Animals</a>
+          <a href="wildlife-birds.html">Birds</a>
         </div>
       </div>
-      <a href="gallery.html">Gallery & Media</a>
+
+      <div class="nav-dropdown">
+        <a href="gallery.html">Gallery & Media ▾</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">RESOURCES & NEWS</div>
+          <a href="gallery.html">Gallery</a>
+          <a href="press-release.html">Press Releases</a>
+          <a href="tenders.html">Bids & Tenders</a>
+          <a href="news.html">News Articles</a>
+        </div>
+      </div>
+
       <div class="nav-dropdown">
         <a href="industry.html" class="active">Investment ▾</a>
         <div class="dropdown-menu">
-          <a href="operators.html" class="active">Operators</a>
+          <div class="dropdown-header">BUSINESS & PARTNERS</div>
+          <a href="industry.html">Tourism Investment</a>
+          <a href="operators.html" class="active">Tour Operators</a>
         </div>
       </div>
-      <a href="where-to-stay.html">Where to Stay</a>
+
+      <a href="index.html#where-to-stay">Where to Stay</a>
       <a href="contact.html">Contact Us</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
+    <div class="nav-cta">
+      <button class="burger" id="burger" aria-label="Toggle Navigation"><span></span><span></span><span></span></button>
+    </div>
   </div>
+  
   <div class="mobile-menu" id="mobileMenu">
-    <a href="about.html">About</a>
-    <a href="destinations.html">Destinations</a>
-    <a href="wildlife.html" style="padding-left:16px;">— Wildlife</a>
-    <a href="culture.html" style="padding-left:16px;">— Culture</a>
-    <a href="gallery.html">Gallery & Media</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="index.html#destinations">Destinations</a>
+    <a href="wildlife.html">Wildlife</a>
+    <a href="gallery.html">Gallery</a>
     <a href="industry.html">Investment</a>
-    <a href="operators.html" style="padding-left:16px;">— Operators</a>
-    <a href="where-to-stay.html">Where to Stay</a>
-    <a href="plan-your-visit.html">Plan Your Visit</a>
+    <a href="operators.html">Tour Operators</a>
     <a href="contact.html">Contact Us</a>
-    <a href="permits.html">Get a Permit</a>
   </div>
 </header>
 
-<!-- Floating Permit Button Bottom-Left -->
-<a href="permits.html" class="floating-permit-btn" title="Get a Permit" aria-label="Get a Permit">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-    <polyline points="14 2 14 8 20 8"></polyline>
-    <line x1="12" y1="18" x2="12" y2="12"></line>
-    <line x1="9" y1="15" x2="15" y2="15"></line>
-  </svg>
-</a>
-
-<!-- Floating WhatsApp Button Bottom-Right -->
-<a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.762.459 3.48 1.332 5.001l-1.416 5.166 5.283-1.385c1.472.802 3.136 1.224 4.79 1.225h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.038-5.176-2.925-7.062a9.924 9.924 0 0 0-7.067-2.944zm0 1.66c4.587 0 8.324 3.733 8.325 8.324 0 2.223-.865 4.312-2.438 5.885-1.574 1.573-3.664 2.439-5.887 2.439h-.003c-1.428 0-2.833-.377-4.068-1.09l-.291-.173-3.023.792.807-2.943-.19-.302a8.277 8.277 0 0 1-1.267-4.608c0-4.59 3.736-8.324 8.325-8.324zm4.567 11.233c-.251-.125-1.488-.735-1.718-.818-.23-.084-.397-.125-.565.125-.167.25-.65.818-.797.985-.146.167-.292.188-.543.063-.251-.125-1.059-.39-2.018-1.245-.746-.665-1.25-1.486-1.396-1.737-.146-.25-.016-.385.11-.51.112-.112.251-.292.376-.438.125-.146.167-.25.251-.417.084-.167.042-.313-.021-.438-.063-.125-.565-1.36-.774-1.862-.204-.488-.412-.422-.565-.43h-.481c-.167 0-.438.063-.668.313s-.878.857-.878 2.088c0 1.231.898 2.42 1.023 2.587.125.167 1.768 2.7 4.283 3.786.598.258 1.065.412 1.43.528.601.191 1.148.164 1.58.1.481-.071 1.488-.608 1.697-1.196.209-.588.209-1.09.146-1.196-.062-.105-.229-.167-.48-.292z"/>
-  </svg>
-</a>
-
 <section class="page-header">
   <div class="wrap">
-    <div style="font-family:var(--mono); color:var(--gold-bright); font-size:0.8rem; margin-bottom:12px;">ACCREDITATION</div>
+    <div style="font-family:var(--mono); color:var(--gold-bright); font-size:0.8rem; margin-bottom:12px;">ACCREDITATION & EXPEDITIONS</div>
     <h1>Licensed Travel Operators</h1>
     <p style="color:var(--sand); max-width:600px; margin-top:12px;">For safety, logistics, and permit processing, all travel within South Sudan must be coordinated through accredited operators recognized by the Ministry of Wildlife Conservation and Tourism.</p>
   </div>
@@ -184,75 +267,132 @@
           <th>Operator Name</th>
           <th>Specialization</th>
           <th>Based In</th>
+          <th>Contact & Booking</th>
           <th>License Status</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Equatoria Wildlife Safaris</strong></td>
-          <td>Boma Migration, Nimule National Park</td>
+          <td><strong>Great Nile Migration Safaris</strong></td>
+          <td>Boma Migration, Nimule National Park, Cultural Tours, Mount Kinyeti Mountaineering & Hiking, Mundari & Toposa Camps</td>
           <td>Juba</td>
+          <td class="op-contact-info">
+            Email: <a href="mailto:info@greatnilesafaris.com">info@greatnilesafaris.com</a><br>
+            Phone: +211 920 000 111
+          </td>
           <td><span class="status-badge">VERIFIED 2026</span></td>
         </tr>
         <tr>
           <td><strong>Great Nile Expeditions</strong></td>
           <td>Cultural Tours, Mundari & Toposa Camps</td>
           <td>Juba / Terekeka</td>
+          <td class="op-contact-info">
+            Email: <a href="mailto:expeditions@greatnile.ss">expeditions@greatnile.ss</a><br>
+            Phone: +211 921 222 333
+          </td>
           <td><span class="status-badge">VERIFIED 2026</span></td>
         </tr>
         <tr>
           <td><strong>Imatong Trekking & Adventure</strong></td>
           <td>Mount Kinyeti Mountaineering & Hiking</td>
           <td>Torit</td>
+          <td class="op-contact-info">
+            Email: <a href="mailto:trek@imatongadventures.com">trek@imatongadventures.com</a><br>
+            Phone: +211 925 444 555
+          </td>
           <td><span class="status-badge">VERIFIED 2026</span></td>
         </tr>
         <tr>
           <td><strong>Sudd River Logistics</strong></td>
           <td>RAMSAR Wetland Safaris & Boat Charter</td>
           <td>Bor</td>
+          <td class="op-contact-info">
+            Email: <a href="mailto:logistics@suddrivers.com">logistics@suddrivers.com</a><br>
+            Phone: +211 928 777 888
+          </td>
           <td><span class="status-badge">VERIFIED 2026</span></td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <!-- Tourist Gear and Apparel Products Section -->
+  <div class="section-heading">
+    <h2>Recommended Expedition Gear & Apparel</h2>
+    <p style="max-width:650px;">Essential gear, merchandise, and tourist products recommended for safari expeditions, mountain hikes, and wilderness camps across South Sudan.</p>
+  </div>
+
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="images/Hiking boots.jpg" alt="All-Terrain Trekking Boots">
+      <div class="product-info">
+        <div class="product-category">Footwear & Trekking</div>
+        <h3 class="product-title">All-Terrain Hiking Boots</h3>
+        <p class="product-desc">Durable, waterproof ankle-support boots recommended for Mount Kinyeti and wetland trekking.</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/gear-safari-tshirt.jpg" alt="Official Ministry Tourism T-Shirt">
+      <div class="product-info">
+        <div class="product-category">Official Merchandise</div>
+        <h3 class="product-title">Wildland Safari T-Shirt</h3>
+        <p class="product-desc">100% breathable organic cotton t-shirt featuring official South Sudan Wildlife Conservation prints.</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/Binocular.jpg" alt="Field Optics Binoculars">
+      <div class="product-info">
+        <div class="product-category">Safari Optics</div>
+        <h3 class="product-title">10x42 Wildlife Binoculars</h3>
+        <p class="product-desc">High-clarity, fog-proof binoculars designed for birding in Sudd Wetlands and migration tracking.</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="images/Tents.jpg" alt="Wilderness Expedition Tent">
+      <div class="product-info">
+        <div class="product-category">Camp Gear</div>
+        <h3 class="product-title">4-Season Safari Tent</h3>
+        <p class="product-desc">Heavy-duty canvas and high-ventilation popup tents for cultural cattle camps and park overnights.</p>
+      </div>
+    </div>
+  </div>
 </main>
 
+<!-- Footer -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <div class="brand" style="color:#fff; margin-bottom:16px;">
-          <img src="images/Ministry logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
-          <span class="brand-text">Ministry of Wildlife<span>Conservation and Tourism</span></span>
+          <img src="images/logo-PNG.png" alt="Ministry of Wildlife Conservation and Tourism Logo" class="brand-logo-img">
+          <span class="brand-text"> Directorate <span> Of Tourism</span></span>
         </div>
-        <p style="font-size:0.85rem; max-width:260px;">Preserving South Sudan's Nature and Cultural Heritage</p>
       </div>
       <div>
         <h5>Explore</h5>
         <ul>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="index.html#destinations">Destinations</a></li>
           <li><a href="destination-single.html?slug=imatong-mountains">Imatong Mountains</a></li>
-          <li><a href="destination-single.html?slug=jebel-kujur">Jebel Kujur</a></li>
           <li><a href="gallery.html">Gallery & Media</a></li>
         </ul>
       </div>
       <div>
         <h5>Cultural</h5>
         <ul>
-          <li><a href="culture.html">Living Culture</a></li>
+          <li><a href="index.html#culture">Living Culture</a></li>
           <li><a href="destination-single.html?slug=terekeka-cultural-tour">Terekeka</a></li>
           <li><a href="destination-single.html?slug=zande-kingdom">Zande Kingdom</a></li>
-          <li><a href="destination-single.html?slug=chollo-kingdom">Chollo Kingdom</a></li>
         </ul>
       </div>
       <div>
         <h5>Services</h5>
         <ul>
           <li><a href="permits.html">Entry Permits & E-Visas</a></li>
-          <li><a href="permits.html#filming">Filming & Drone Permits</a></li>
           <li><a href="operators.html" class="active">Tour Operators</a></li>
-          <li><a href="where-to-stay.html">Where to Stay</a></li>
           <li><a href="industry.html">Tourism Investment</a></li>
         </ul>
       </div>
@@ -272,12 +412,32 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- Floating Widgets -->
+<a href="https://wa.me/+254115556509?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20tourism%20and%20permits%20in%20South%20Sudan." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <span class="whatsapp-tooltip">Chat with us</span>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a href="permits.html" class="permit-float" aria-label="Get a Permit">
+  <span class="permit-tooltip">Get a Permit</span>
+  <i class="fa-solid fa-passport"></i>
+</a>
+
 <script>
-  const burger = document.getElementById('burger');
+  // Mobile Navigation Menu Toggle
+  const burger = document.getElementById('burger'); 
   const mobileMenu = document.getElementById('mobileMenu');
+  
   if (burger && mobileMenu) {
-    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    burger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
   }
 </script>
 </body>
